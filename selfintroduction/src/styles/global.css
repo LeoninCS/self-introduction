@@ -3313,3 +3313,463 @@ a {
     grid-column: auto;
   }
 }
+
+@media (max-width: 860px) {
+  html {
+    scroll-padding-top: 76px;
+  }
+
+  .site-content {
+    transform: translateY(18px) scale(0.992);
+  }
+
+  .hero {
+    min-height: auto;
+    overflow: visible;
+    padding: 92px clamp(16px, 5vw, 26px) 56px;
+  }
+
+  .hero::before,
+  .hero::after,
+  .section::before,
+  .section-title > p::after {
+    opacity: 0.22;
+  }
+
+  .nav {
+    top: 10px;
+    right: 12px;
+    left: 12px;
+    width: auto;
+    max-width: none;
+    justify-content: flex-start;
+    gap: 7px;
+    overflow-x: auto;
+    padding: 6px;
+    translate: 0 0;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .nav::before {
+    display: none;
+  }
+
+  .nav__option {
+    flex: 0 0 auto;
+    gap: 6px;
+    padding: 9px 13px;
+    font-size: 0.86rem;
+    white-space: nowrap;
+  }
+
+  .nav__dot {
+    width: 7px;
+    height: 7px;
+  }
+
+  .hero__layout {
+    max-width: 680px;
+    margin-top: 0;
+    gap: 28px;
+  }
+
+  .hero__content {
+    max-width: 100%;
+  }
+
+  .hero h1 {
+    font-size: clamp(4.2rem, 17vw, 7rem);
+  }
+
+  .hero__intro {
+    max-width: 100%;
+    margin-top: 20px;
+    font-size: clamp(0.98rem, 2.8vw, 1.12rem);
+    line-height: 1.72;
+  }
+
+  .hero__actions {
+    display: grid;
+    width: 100%;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 14px;
+    margin-top: 28px;
+  }
+
+  .magic-button {
+    width: 100%;
+    min-width: 0;
+    min-height: 56px;
+    padding: 0.86rem 1.15rem;
+    font-size: 0.96rem;
+  }
+
+  .magic-button__sparkle {
+    width: 1.35rem;
+  }
+
+  .magic-button__text {
+    white-space: nowrap;
+  }
+
+  .profile-visual {
+    width: 100%;
+    max-width: 560px;
+    min-height: auto;
+    margin-top: 0;
+    padding: 20px;
+  }
+
+  .profile-visual__mark {
+    width: 60px;
+    height: 60px;
+    font-size: 1.75rem;
+  }
+
+  .profile-visual__dashboard {
+    gap: 18px;
+    margin: 26px 0 24px;
+  }
+
+  .profile-visual__meter {
+    height: 116px;
+  }
+
+  .profile-visual__ticker {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .profile-visual__ticker span {
+    min-width: 0;
+  }
+
+  .section {
+    padding: 76px clamp(16px, 5vw, 26px);
+    scroll-margin-top: 76px;
+  }
+
+  .section-title,
+  .section-title__text {
+    max-width: 100%;
+  }
+
+  .section-title h2 {
+    font-size: clamp(2.35rem, 12vw, 4.2rem);
+  }
+
+  .section-title__text {
+    font-size: 1rem;
+    line-height: 1.72;
+  }
+
+  .about-grid,
+  .skill-grid,
+  .project-list,
+  .more__stack,
+  .hobby-grid {
+    gap: 14px;
+  }
+
+  .about-grid,
+  .skill-grid,
+  .hobby-grid,
+  .more__insight-grid,
+  .more__footer-grid {
+    margin-top: 28px;
+  }
+
+  .about-card,
+  .skill-card,
+  .project-card,
+  .hobby-card,
+  .achievement-panel,
+  .finance-panel,
+  .music-panel,
+  .ai-toolchain,
+  .platform-card,
+  .more-contact a,
+  .more-contact span {
+    padding: 18px;
+  }
+
+  .about-card,
+  .skill-card,
+  .hobby-card,
+  .platform-card {
+    min-height: auto;
+  }
+
+  .about-card h3 {
+    font-size: clamp(1.55rem, 7vw, 2.25rem);
+  }
+
+  .about-card--merged {
+    grid-template-columns: 1fr;
+  }
+
+  .project-card {
+    display: grid;
+    gap: 16px;
+  }
+
+  .project-card__hud {
+    width: 100%;
+    min-width: 0;
+    grid-template-columns: auto 1fr;
+    align-items: center;
+    justify-items: start;
+  }
+
+  .project-card__screen {
+    width: min(100%, 180px);
+    height: 74px;
+  }
+
+  .platform-grid {
+    justify-content: stretch;
+    gap: 12px;
+  }
+
+  .platform-card {
+    flex-basis: calc((100% - 12px) / 2);
+    max-width: calc((100% - 12px) / 2);
+    min-width: 0;
+  }
+
+  .finance-panel__group span,
+  .music-panel__group span {
+    max-width: 100%;
+    line-height: 1.45;
+    overflow-wrap: anywhere;
+  }
+
+  .more-contact a,
+  .more-contact span,
+  .contact__links a,
+  .contact__links span {
+    overflow-wrap: anywhere;
+  }
+}
+
+@media (max-width: 560px) {
+  .hero {
+    padding: 82px clamp(14px, 5vw, 20px) 46px;
+  }
+
+  .hero__layout {
+    gap: 22px;
+  }
+
+  .hero h1 {
+    font-size: clamp(3.25rem, 17.2vw, 4.9rem);
+  }
+
+  .hero__intro {
+    font-size: 0.96rem;
+    line-height: 1.68;
+  }
+
+  .hero__actions {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+    margin-top: 24px;
+  }
+
+  .magic-button {
+    flex-basis: auto;
+    min-height: 52px;
+    padding: 0.78rem 0.9rem;
+    font-size: 0.9rem;
+  }
+
+  .profile-visual {
+    padding: 16px;
+  }
+
+  .profile-visual__header {
+    align-items: flex-start;
+  }
+
+  .profile-visual__mark {
+    width: 54px;
+    height: 54px;
+    font-size: 1.55rem;
+  }
+
+  .profile-visual__dashboard {
+    gap: 16px;
+    margin: 22px 0 20px;
+  }
+
+  .profile-visual__radar {
+    width: min(62vw, 190px);
+  }
+
+  .profile-visual__signals {
+    gap: 10px;
+  }
+
+  .profile-visual__signals span {
+    min-height: 38px;
+    padding: 0 12px;
+    font-size: 0.72rem;
+  }
+
+  .profile-visual__meter {
+    height: 92px;
+    margin: 20px 0;
+  }
+
+  .profile-visual__ticker {
+    grid-template-columns: 1fr;
+  }
+
+  .profile-visual__tags span,
+  .profile-visual__ticker span {
+    font-size: 0.72rem;
+  }
+
+  .section {
+    padding: 64px clamp(14px, 5vw, 20px);
+  }
+
+  .section-title > p::after {
+    display: none;
+  }
+
+  .section-title h2 {
+    font-size: clamp(2.2rem, 15vw, 3.7rem);
+  }
+
+  .about-card,
+  .skill-card,
+  .project-card,
+  .hobby-card,
+  .achievement-panel,
+  .finance-panel,
+  .music-panel,
+  .ai-toolchain,
+  .platform-card,
+  .more-contact a,
+  .more-contact span {
+    padding: 16px;
+  }
+
+  .about-card__icon,
+  .achievement-panel__icon,
+  .skill-card__icon,
+  .hobby-card__icon,
+  .finance-panel__icon,
+  .music-panel__icon,
+  .ai-toolchain__icon {
+    width: 48px;
+    height: 48px;
+  }
+
+  .skill-card h3 {
+    margin-top: 22px;
+  }
+
+  .project-card__hud {
+    grid-template-columns: 1fr;
+  }
+
+  .project-card__screen {
+    width: min(100%, 180px);
+  }
+
+  .platform-card {
+    flex-basis: 100%;
+    max-width: 100%;
+    min-height: 116px;
+  }
+
+  .platform-card strong {
+    font-size: 1.04rem;
+  }
+
+  .more .ai-toolchain--compact .ai-toolchain__grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .ai-toolchain--compact .ai-toolchain__chip {
+    justify-items: center;
+    text-align: center;
+  }
+
+  .music-panel__grid,
+  .finance-panel__grid {
+    gap: 8px;
+  }
+}
+
+@media (max-width: 430px) {
+  .nav {
+    right: 8px;
+    left: 8px;
+    gap: 5px;
+    padding: 5px;
+  }
+
+  .nav__option {
+    padding: 8px 10px;
+    font-size: 0.8rem;
+  }
+
+  .hero h1 {
+    font-size: clamp(3.05rem, 16.5vw, 4.2rem);
+  }
+
+  .hero__actions {
+    gap: 8px;
+  }
+
+  .magic-button {
+    min-height: 50px;
+    padding-inline: 0.72rem;
+    font-size: 0.86rem;
+  }
+
+  .magic-button__sparkle {
+    width: 1.15rem;
+  }
+
+  .profile-visual__tags,
+  .finance-panel__group div,
+  .music-panel__group div {
+    gap: 7px;
+  }
+
+  .more .ai-toolchain--compact .ai-toolchain__grid {
+    grid-template-columns: 1fr;
+  }
+
+  .more-contact a,
+  .more-contact span {
+    min-height: 72px;
+  }
+}
+
+@media (hover: none), (pointer: coarse) {
+  .background-pattern__cursor,
+  .background-pattern__particles::after {
+    display: none;
+  }
+
+  .background-pattern__grid {
+    opacity: 0.28;
+    animation-duration: 160s;
+  }
+
+  .background-pattern__particles {
+    opacity: 0.12;
+  }
+
+  .float-card:hover,
+  .more .float-card:hover,
+  .magic-button:is(:hover, :focus-visible) {
+    transform: none;
+  }
+}

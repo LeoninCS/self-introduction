@@ -4,6 +4,12 @@ const BackgroundPattern = () => {
   const patternRef = useRef(null);
 
   useEffect(() => {
+    const supportsFinePointer = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+
+    if (!supportsFinePointer) {
+      return undefined;
+    }
+
     let pointerFrameId;
     let latestPointer = {
       xRatio: 0.5,
