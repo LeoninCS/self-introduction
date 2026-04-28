@@ -103,9 +103,18 @@ const More = () => {
               <div className="finance-panel__group" key={group.name}>
                 <strong>{group.name}</strong>
                 <div>
-                  {group.items.map((item) => (
-                    <span key={item}>{item}</span>
-                  ))}
+                  {group.items.map((item) => {
+                    const label = typeof item === 'string' ? item : item.label;
+                    const href = typeof item === 'string' ? undefined : item.href;
+
+                    return href ? (
+                      <a href={href} key={label} rel="noreferrer" target="_blank">
+                        {label}
+                      </a>
+                    ) : (
+                      <span key={label}>{label}</span>
+                    );
+                  })}
                 </div>
               </div>
             ))}

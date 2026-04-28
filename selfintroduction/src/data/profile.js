@@ -4,11 +4,12 @@ export const profile = {
   role: 'Backend Developer Intern',
   location: 'Hangzhou, China',
   intro:
-    '河南大学软件工程本科在读，河南大学 ACM 集训队成员，目前在环界云计算做后端开发实习。平时主要写 Go，也会做一些前端、云原生、分布式、Agent 和 Blockchain 相关的探索。',
+    '河南大学软件工程本科在读，目前在环界云计算做后端开发实习。平时主要写 Go，也会做一些前端、云原生、分布式、Agent 和 Blockchain 相关的探索。',
   highlights: [
     'Go Backend',
     'Cloud Native / Sealos',
     'Agent / Blockchain',
+    'Vibe Coding',
   ],
   visualSignals: [
     { label: 'Go', value: '92%' },
@@ -81,7 +82,7 @@ export const profile = {
     {
       name: 'C++ / ACM',
       icon: 'cpp',
-      repo: 'https://github.com/cp-algorithms/cp-algorithms',
+      repo: 'https://codeforces.com/profile/LeoninCS',
       description: '算法训练背景，重视基础能力和问题拆解',
     },
     {
@@ -155,19 +156,34 @@ export const profile = {
   finance: [
     {
       name: '宽基指数',
-      items: ['纳斯达克 100', '标普 500', '日经 225'],
+      items: [
+        { label: '纳斯达克 100', href: 'https://finance.yahoo.com/quote/%5ENDX/' },
+        { label: '标普 500', href: 'https://finance.yahoo.com/quote/%5EGSPC/' },
+        { label: '日经 225', href: 'https://finance.yahoo.com/quote/%5EN225/' },
+      ],
     },
     {
       name: 'Crypto',
-      items: ['BTC', 'ETH', 'USDT'],
+      items: [
+        { label: 'BTC', href: 'https://finance.yahoo.com/quote/BTC-USD/' },
+        { label: 'ETH', href: 'https://finance.yahoo.com/quote/ETH-USD/' },
+        { label: 'USDT', href: 'https://finance.yahoo.com/quote/USDT-USD/' },
+      ],
     },
     {
       name: '个股',
-      items: ['可口可乐', '英伟达', '苹果', '微软', '谷歌', '美光科技'],
+      items: [
+        { label: '可口可乐', href: 'https://finance.yahoo.com/quote/KO/' },
+        { label: '英伟达', href: 'https://finance.yahoo.com/quote/NVDA/' },
+        { label: '苹果', href: 'https://finance.yahoo.com/quote/AAPL/' },
+        { label: '微软', href: 'https://finance.yahoo.com/quote/MSFT/' },
+        { label: '谷歌', href: 'https://finance.yahoo.com/quote/GOOGL/' },
+        { label: '美光科技', href: 'https://finance.yahoo.com/quote/MU/' },
+      ],
     },
   ],
   music: {
-    genres: ['R&B', 'Jazz', 'Hip-Hop'],
+    genres: ['R&B', 'Jazz', 'Hip-Hop', 'Pop'],
     artists: [
       '方大同',
       '李京泽',
@@ -182,7 +198,6 @@ export const profile = {
       'Frank Ocean',
     ],
     chineseAlbums: [
-      'BULLY',
       '梦想家',
       '危险世界',
       '在雨后醒来',
@@ -196,6 +211,7 @@ export const profile = {
       '万能青年旅店',
     ],
     englishAlbums: [
+      'BULLY',
       'Section.80',
       'My Beautiful Dark Twisted Fantasy',
       'To Pimp a Butterfly',
@@ -239,8 +255,8 @@ export const profile = {
     {
       name: 'LeetCode',
       href: 'https://leetcode.cn/u/mvp-u/',
-      label: 'leonincs',
-      detail: 'mvp-u / 1500+ 题',
+      label: '布洛克琴',
+      detail: '布洛克琴 / 1500+ 题',
       icon: 'leetcode',
     },
     {
