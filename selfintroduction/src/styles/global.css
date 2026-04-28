@@ -441,8 +441,8 @@ a {
       transparent 1px,
       transparent 92px
     );
-  opacity: 0.42;
-  animation: grid-shift 72s linear infinite;
+  opacity: 0.38;
+  animation: grid-shift 168s linear infinite;
 }
 
 .background-pattern__container::after {
@@ -471,9 +471,9 @@ a {
     6vw 8vh,
     18vw 22vh;
   background-size:
-    140px 160px,
-    220px 260px;
-  opacity: 0.18;
+    190px 220px,
+    300px 340px;
+  opacity: 0.14;
 }
 
 .background-pattern__particles::after {
@@ -489,10 +489,10 @@ a {
     19vw 24vh,
     2vw 4vh;
   background-size:
-    112px 138px,
-    168px 210px,
-    236px 260px;
-  opacity: 0.34;
+    170px 210px,
+    240px 300px,
+    340px 380px;
+  opacity: 0.24;
   transform: translate3d(calc(var(--cursor-x) * 12px), calc(var(--cursor-y) * 10px), 0);
 }
 
@@ -1780,13 +1780,21 @@ a {
 
 .float-card::after {
   z-index: 0;
+  padding: 1px;
   overflow: hidden;
   background:
-    linear-gradient(110deg, transparent 0%, rgba(255, 255, 255, 0.1) 42%, transparent 58%),
-    linear-gradient(135deg, rgba(255, 255, 255, 0.12), transparent 42%, rgba(140, 248, 223, 0.08));
-  opacity: 0.24;
-  transform: translateX(-120%);
-  animation: card-gleam 9.5s cubic-bezier(0.16, 1, 0.3, 1) infinite;
+    linear-gradient(135deg, rgba(140, 248, 223, 0.34), transparent 34%, rgba(173, 95, 255, 0.28) 72%, rgba(0, 191, 255, 0.18)),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.12), transparent 42%);
+  opacity: 0.18;
+  transform: none;
+  -webkit-mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  mask-composite: exclude;
 }
 
 .float-card:hover {
@@ -3760,16 +3768,26 @@ a {
 
   .background-pattern__grid {
     opacity: 0.28;
-    animation-duration: 160s;
+    animation-duration: 240s;
   }
 
   .background-pattern__particles {
-    opacity: 0.12;
+    opacity: 0.1;
   }
 
   .float-card:hover,
   .more .float-card:hover,
   .magic-button:is(:hover, :focus-visible) {
     transform: none;
+  }
+
+  .profile-visual__radar::before {
+    animation: radar-spin 26s linear infinite !important;
+  }
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .profile-visual__radar::before {
+    animation: radar-spin 18s linear infinite !important;
   }
 }
