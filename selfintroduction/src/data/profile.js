@@ -1,0 +1,290 @@
+export const profile = {
+  name: 'LeoninCS',
+  realName: '献超前',
+  role: 'Backend Developer Intern',
+  location: 'Hangzhou, China',
+  intro:
+    '河南大学软件工程本科在读，河南大学 ACM 集训队成员，目前在环界云计算做后端开发实习。平时主要写 Go，也会做一些前端、云原生、分布式、Agent 和 Blockchain 相关的探索。',
+  highlights: [
+    'Go Backend',
+    'Cloud Native / Sealos',
+    'Agent / Blockchain',
+  ],
+  visualSignals: [
+    { label: 'Go', value: '92%' },
+    { label: 'Cloud', value: '86%' },
+    { label: 'AI', value: '82%' },
+  ],
+  tickerItems: ['ACM Trained', 'Open Source', 'Distributed Systems'],
+  education: {
+    school: '河南大学',
+    major: '软件工程',
+    period: '2023～2027',
+    group: '河南大学 ACM 集训队',
+  },
+  awards: [
+    '第十一届团体程序设计天梯赛 个人国家二等奖',
+    '第十六届蓝桥杯大赛 C/C++ B 组 国家优秀奖',
+    '第二十一届百度之星程序设计大赛 初赛铜奖',
+  ],
+  experience: [
+    {
+      company: '环界云计算',
+      role: '后端开发实习生',
+      period: '2026/03 - 至今',
+      description:
+        '参与 Sealos 相关后端和管理端工作，主要围绕集群合规、可观测和 AIOps 场景推进功能落地。',
+      items: [
+        '负责部分模块的设计、开发和维护，持续推进产品体验和内部协作效率。',
+        '参与日志分析、合规治理和平台能力建设，积累云原生项目实践。',
+        '参与多个功能模块迭代，保持对工程质量和系统稳定性的关注。',
+      ],
+    },
+  ],
+  skills: [
+    {
+      name: 'Go Backend',
+      icon: 'go',
+      repo: 'https://github.com/golang/go',
+      description: '主要使用语言，偏后端服务和工程实践',
+    },
+    {
+      name: 'Vue / React Full Stack',
+      icon: 'frontend',
+      repo: 'https://github.com/vuejs/core',
+      description: '页面实现、接口联调和管理端开发',
+    },
+    {
+      name: 'Cloud Native',
+      icon: 'cloud',
+      repo: 'https://github.com/kubernetes/kubernetes',
+      description: '容器、集群和云原生项目工作方式',
+    },
+    {
+      name: 'Distributed Systems',
+      icon: 'distributed',
+      repo: 'https://github.com/etcd-io/raft',
+      description: '一致性、可靠性和系统设计',
+    },
+    {
+      name: 'Database / MQ',
+      icon: 'database',
+      repo: 'https://github.com/redis/redis',
+      description: '常用存储、缓存和消息队列',
+    },
+    {
+      name: 'AI Agent',
+      icon: 'agent',
+      repo: 'https://github.com/LeoninCS/multi-agent-workflow-assistant',
+      description: 'AI 工具和 Agent 工作流在研发中的使用',
+    },
+    {
+      name: 'C++ / ACM',
+      icon: 'cpp',
+      repo: 'https://github.com/cp-algorithms/cp-algorithms',
+      description: '算法训练背景，重视基础能力和问题拆解',
+    },
+    {
+      name: 'Web3',
+      icon: 'web3',
+      repo: 'https://github.com/ethereum/go-ethereum',
+      description: '链上产品和去中心化应用形态',
+    },
+    {
+      name: 'Open Source',
+      icon: 'opensource',
+      repo: 'https://github.com/labring/sealos',
+      description: '开源项目协作和工程迭代',
+    },
+  ],
+  projects: [
+    {
+      title: 'Go 语言俱乐部',
+      tag: 'Community',
+      href: 'https://goclub.space/',
+      description: '围绕 Go 学习和分享搭建的社区型项目。',
+    },
+    {
+      title: 'Sealos / 集群合规与 AIOps',
+      tag: 'Internship',
+      href: 'https://github.com/labring/sealos',
+      description: '实习期间参与的云原生平台项目，主要接触合规、可观测和 AIOps 相关方向。',
+    },
+    {
+      title: '视频 Feed 流系统',
+      tag: 'Backend',
+      href: 'https://github.com/LeoninCS/feedsystem_video_go',
+      description: '一个偏完整后端系统练习，围绕内容分发、审核、互动和稳定性展开。',
+    },
+    {
+      title: '基于 Raft 的分布式账本',
+      tag: 'Distributed',
+      href: 'https://github.com/LeoninCS/distributed_ledger_go',
+      description: '用 Go 实现分布式账本相关能力，重点理解共识和数据一致性。',
+    },
+    {
+      title: '多智能体工作流助手',
+      tag: 'AI Agent',
+      href: 'https://github.com/LeoninCS/multi-agent-workflow-assistant',
+      description: '把 AI 工具接入研发流程的一次尝试，关注任务拆解、协作和交付效率。',
+    },
+  ],
+  hobbies: [
+    {
+      name: '骑行',
+      icon: 'cycling',
+      description: '喜欢长距离骑行，完成过单日环太湖和环海南岛，累计骑行 10000+ 公里。',
+    },
+    {
+      name: 'HiFi',
+      icon: 'hifi',
+      description: '随身 HiFi：飞傲 KA13 + 森海塞尔 IE200，喜欢干净、耐听、有解析力的声音。',
+    },
+    {
+      name: '摄影',
+      icon: 'photo',
+      description: '相机：Nikon Z30 + NIKKOR Z DX 16-50mm，喜欢记录城市、路途和日常里的结构感。',
+      href: 'https://www.instagram.com/forever_mvp0?igsh=MXhnNjA3ZjFkbTZwbg==',
+    },
+    {
+      name: '理财',
+      icon: 'finance',
+      description: '平时会关注全球主要资产，偏长期观察和资产配置思路。',
+    },
+  ],
+  finance: [
+    {
+      name: '宽基指数',
+      items: ['纳斯达克 100', '标普 500', '日经 225'],
+    },
+    {
+      name: 'Crypto',
+      items: ['BTC', 'ETH', 'USDT'],
+    },
+    {
+      name: '个股',
+      items: ['可口可乐', '英伟达', '苹果', '微软', '谷歌', '美光科技'],
+    },
+  ],
+  music: {
+    genres: ['R&B', 'Jazz', 'Hip-Hop'],
+    artists: [
+      '方大同',
+      '李京泽',
+      'Kendrick Lamar',
+      'Kanye West',
+      'J. Cole',
+      'SZA',
+      'Justin Bieber',
+      'NewJeans',
+      'RADWIMPS',
+      'amazarashi',
+      'Frank Ocean',
+    ],
+    chineseAlbums: [
+      'BULLY',
+      '梦想家',
+      '危险世界',
+      '在雨后醒来',
+      '橙月',
+      '冀西南林路行',
+      '收敛水',
+      '未来',
+      '回到未来',
+      '丑奴儿',
+      '瓦合',
+      '万能青年旅店',
+    ],
+    englishAlbums: [
+      'Section.80',
+      'My Beautiful Dark Twisted Fantasy',
+      'To Pimp a Butterfly',
+      'good kid, m.A.A.d city',
+      'The Velvet Underground & Nico',
+      'Songs Of A Lost World',
+      'Blonde',
+      'Lean on Me: The Best of Bill Withers',
+    ],
+  },
+  aiTools: [
+    {
+      name: 'Codex',
+      description: '日常编码协作',
+    },
+    {
+      name: 'Claude Code',
+      description: '复杂问题梳理',
+    },
+    {
+      name: 'Gemini',
+      description: '资料和上下文整理',
+    },
+    {
+      name: 'OpenClaw',
+      description: 'Agent 工作流探索',
+    },
+    {
+      name: 'Hermes',
+      description: '本地模型与工具尝试',
+    },
+  ],
+  platforms: [
+    {
+      name: 'GitHub',
+      href: 'https://github.com/LeoninCS',
+      label: 'LeoninCS',
+      icon: 'github',
+    },
+    {
+      name: 'LeetCode',
+      href: 'https://leetcode.cn/u/mvp-u/',
+      label: 'mvp-u',
+      icon: 'leetcode',
+    },
+    {
+      name: 'Codeforces',
+      href: 'https://codeforces.com/profile/LeoninCS',
+      label: 'LeoninCS',
+      icon: 'codeforces',
+    },
+    {
+      name: 'GoClub',
+      href: 'https://goclub.space/',
+      label: 'goclub.space',
+      icon: 'site',
+    },
+    {
+      name: 'Bilibili',
+      href: 'https://space.bilibili.com/491359383',
+      label: '491359383',
+      icon: 'bilibili',
+    },
+    {
+      name: '小红书',
+      href: 'https://xhslink.com/m/68F5FSoWMxt',
+      label: '8635 赞与收藏',
+      icon: 'xiaohongshu',
+    },
+    {
+      name: 'Instagram',
+      href: 'https://www.instagram.com/forever_mvp0?igsh=MXhnNjA3ZjFkbTZwbg==',
+      label: 'forever_mvp0',
+      icon: 'instagram',
+    },
+    {
+      name: 'X',
+      href: 'https://x.com/xxxmvp2',
+      label: 'xxxmvp2',
+      icon: 'x',
+    },
+  ],
+  achievements: [
+    'LeetCode 2100 分 / Codeforces 1653 分 / 累计刷题 1500+',
+    'CET-6 / 全网 1000+ 粉丝 / GitHub 200+ Star',
+  ],
+  contact: {
+    email: 'xianchaoqian@foxmail.com',
+    phone: '17638336529',
+    github: 'https://github.com/LeoninCS',
+  },
+};
