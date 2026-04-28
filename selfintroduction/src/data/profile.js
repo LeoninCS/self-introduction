@@ -157,9 +157,9 @@ export const profile = {
     {
       name: '宽基指数',
       items: [
-        { label: '纳斯达克 100', href: 'https://finance.yahoo.com/quote/%5ENDX/' },
-        { label: '标普 500', href: 'https://finance.yahoo.com/quote/%5EGSPC/' },
-        { label: '日经 225', href: 'https://finance.yahoo.com/quote/%5EN225/' },
+        { label: 'Nasdaq 100', href: 'https://finance.yahoo.com/quote/%5ENDX/' },
+        { label: 'S&P 500', href: 'https://finance.yahoo.com/quote/%5EGSPC/' },
+        { label: 'Nikkei 225', href: 'https://finance.yahoo.com/quote/%5EN225/' },
       ],
     },
     {
@@ -173,12 +173,12 @@ export const profile = {
     {
       name: '个股',
       items: [
-        { label: '可口可乐', href: 'https://finance.yahoo.com/quote/KO/' },
-        { label: '英伟达', href: 'https://finance.yahoo.com/quote/NVDA/' },
-        { label: '苹果', href: 'https://finance.yahoo.com/quote/AAPL/' },
-        { label: '微软', href: 'https://finance.yahoo.com/quote/MSFT/' },
-        { label: '谷歌', href: 'https://finance.yahoo.com/quote/GOOGL/' },
-        { label: '美光科技', href: 'https://finance.yahoo.com/quote/MU/' },
+        { label: 'Coca-Cola', href: 'https://finance.yahoo.com/quote/KO/' },
+        { label: 'NVIDIA', href: 'https://finance.yahoo.com/quote/NVDA/' },
+        { label: 'Apple', href: 'https://finance.yahoo.com/quote/AAPL/' },
+        { label: 'Microsoft', href: 'https://finance.yahoo.com/quote/MSFT/' },
+        { label: 'Alphabet', href: 'https://finance.yahoo.com/quote/GOOGL/' },
+        { label: 'Micron Technology', href: 'https://finance.yahoo.com/quote/MU/' },
       ],
     },
   ],
