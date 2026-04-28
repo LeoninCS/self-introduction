@@ -25,6 +25,7 @@
 
 html {
   scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
 }
 
 body {
@@ -41,11 +42,13 @@ a {
 
 #root {
   min-height: 100vh;
+  min-height: 100dvh;
 }
 
 .app-shell {
   position: relative;
   min-height: 100vh;
+  min-height: 100dvh;
   isolation: isolate;
 }
 
@@ -78,6 +81,7 @@ a {
   z-index: 20;
   display: grid;
   min-height: 100vh;
+  min-height: 100dvh;
   place-items: center;
   overflow: hidden;
   background:
@@ -2454,7 +2458,8 @@ a {
 }
 
 .more {
-  padding-bottom: clamp(156px, 16vh, 230px);
+  padding-bottom: clamp(220px, 24vh, 340px);
+  transform: none;
 }
 
 .more__stack {
@@ -3175,6 +3180,7 @@ a {
   --float-lift: -4px;
   --float-shadow: 0.14;
   --float-tilt: 0.18deg;
+  transform: translate3d(0, 0, 0);
   animation: card-idle var(--float-duration, 13s) ease-in-out infinite;
   animation-delay: var(--float-delay, 0s);
   animation-range: normal;
@@ -3989,5 +3995,223 @@ a {
 @media (hover: hover) and (pointer: fine) {
   .profile-visual__radar::before {
     animation: radar-spin 18s linear infinite !important;
+  }
+}
+
+@media (max-width: 860px), (hover: none), (pointer: coarse) {
+  :root {
+    --scroll-bg-y: 0px;
+    --scroll-card-y: 0px;
+    --scroll-card-z: 0px;
+    --scroll-depth-opacity: 0.12;
+    --scroll-grid-y: 0px;
+    --scroll-particle-y: 0px;
+    --scroll-rotate-x: 0deg;
+    --scroll-rotate-y: 0deg;
+    --scroll-section-y: 0px;
+    --scroll-title-y: 0px;
+  }
+
+  html {
+    scroll-padding-top: calc(74px + env(safe-area-inset-top));
+  }
+
+  body {
+    overscroll-behavior-y: none;
+  }
+
+  .site-content {
+    perspective: none;
+    perspective-origin: center;
+    transform: none;
+    transform-style: flat;
+    transition: opacity 420ms ease;
+  }
+
+  .app-shell--visible .site-content {
+    transform: none;
+  }
+
+  .loader-screen,
+  .loader-screen::after,
+  .background-pattern::before,
+  .background-pattern::after,
+  .background-pattern__container,
+  .background-pattern__grid,
+  .background-pattern__particles,
+  .nav,
+  .nav::before,
+  .nav::after,
+  .hero::before,
+  .hero::after,
+  .section::before,
+  .section-title > p::after,
+  .magic-button,
+  .magic-button__dots::before,
+  .magic-button__dots::after,
+  .profile-visual__grid,
+  .profile-visual__halo,
+  .profile-visual__constellation::before,
+  .profile-visual__constellation span,
+  .profile-visual__radar,
+  .profile-visual__radar::before,
+  .profile-visual__core,
+  .profile-visual__signals span::before,
+  .profile-visual__signals span::after,
+  .profile-visual__tags span,
+  .profile-visual__ticker span,
+  .about-card__icon::before,
+  .skill-card__icon::before,
+  .hobby-card__icon::before,
+  .project-card__screen::before,
+  .project-card__screen i,
+  .float-card,
+  .float-card::before,
+  .float-card::after {
+    animation: none !important;
+  }
+
+  .background-pattern::before,
+  .background-pattern::after,
+  .background-pattern__container,
+  .background-pattern__grid,
+  .background-pattern__particles,
+  .background-pattern__particles::after,
+  .background-pattern__cursor,
+  .hero,
+  .hero__layout,
+  .section,
+  .section-title,
+  .float-card,
+  .more .float-card,
+  .float-card:hover,
+  .more .float-card:hover {
+    transform: none !important;
+  }
+
+  .nav,
+  .nav__option,
+  .profile-visual,
+  .float-card,
+  .skill-card,
+  .project-card,
+  .contact__links a,
+  .contact__links span {
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+  }
+
+  .nav,
+  .float-card,
+  .magic-button,
+  .background-pattern,
+  .background-pattern *,
+  .hero__layout,
+  .section,
+  .section-title {
+    transform-style: flat;
+    will-change: auto;
+  }
+
+  .background-pattern__container {
+    scale: 1;
+  }
+
+  .background-pattern__grid {
+    opacity: 0.2;
+  }
+
+  .background-pattern__particles,
+  .background-pattern__cursor {
+    display: none;
+  }
+
+  .nav {
+    top: max(8px, env(safe-area-inset-top));
+    min-height: 52px;
+    background: rgba(10, 5, 32, 0.88);
+    box-shadow:
+      0 14px 34px rgba(0, 0, 0, 0.28),
+      0 1px 0 rgba(255, 255, 255, 0.12) inset;
+    touch-action: pan-x;
+  }
+
+  .hero h1::before {
+    transform: translate(8px, 10px);
+  }
+
+  .hero h1::after {
+    transform: translate(5px, 7px);
+  }
+
+  .section-title h2::after {
+    transform: translate(6px, 8px);
+  }
+
+  .skills .section-title,
+  .projects .section-title,
+  .more .section-title {
+    margin-bottom: 34px;
+  }
+
+  .skill-grid,
+  .project-list,
+  .more__stack {
+    padding-top: 0;
+  }
+
+  .profile-visual {
+    justify-self: center;
+  }
+
+  .profile-visual__halo,
+  .float-card::before {
+    display: none;
+  }
+
+  .float-card::after,
+  .more .float-card::after {
+    opacity: 0.08;
+    transform: none;
+  }
+
+  .app-shell--visible .hero .eyebrow,
+  .app-shell--visible .hero h1,
+  .app-shell--visible .hero__intro,
+  .app-shell--visible .hero__actions,
+  .app-shell--visible .profile-visual {
+    animation: none;
+    filter: none;
+    opacity: 1;
+    transform: none;
+  }
+
+  .about-card__icon svg,
+  .skill-card__icon svg,
+  .hobby-card__icon svg,
+  .project-card__link {
+    filter: none;
+  }
+
+  .profile-visual__header > div,
+  .finance-panel__header > div,
+  .music-panel__header > div,
+  .ai-toolchain__header > div,
+  .hobby-card > div,
+  .project-card > div {
+    min-width: 0;
+  }
+
+  .profile-visual__header strong,
+  .finance-panel h3,
+  .music-panel h3,
+  .ai-toolchain h3,
+  .hobby-card p,
+  .project-card p {
+    overflow-wrap: anywhere;
+  }
+
+  .more {
+    padding-bottom: 104px;
   }
 }

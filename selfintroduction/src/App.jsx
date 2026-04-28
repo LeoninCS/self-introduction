@@ -92,8 +92,10 @@ const App = () => {
 
   useEffect(() => {
     const reduceMotionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+    const compactViewportQuery = window.matchMedia('(max-width: 860px)');
+    const coarsePointerQuery = window.matchMedia('(hover: none), (pointer: coarse)');
 
-    if (reduceMotionQuery.matches) {
+    if (reduceMotionQuery.matches || compactViewportQuery.matches || coarsePointerQuery.matches) {
       return undefined;
     }
 
