@@ -26,24 +26,29 @@ const ExhibitionWall = ({ onOpenPhoto }) => (
           </div>
 
           <div className="exhibition-track">
-            {group.photos.filter(Boolean).map((photo, index) => (
-              <figure className="exhibition-frame" key={photo.src} style={{ '--frame-index': index }}>
-                <button
-                  aria-label={`Open ${photo.title}`}
-                  className="exhibition-frame__button"
-                  onClick={() => onOpenPhoto({ ...photo, group: group.title })}
-                  type="button"
-                >
-                  <LazyImage
-                    alt={photo.title}
-                    rootMargin="240px 620px"
-                    rootSelector=".exhibition-track"
-                    sizes="(max-width: 620px) 72vw, (max-width: 980px) 46vw, 340px"
-                    src={photo.previewSrc ?? photo.src}
-                  />
-                </button>
-              </figure>
-            ))}
+            {group.photos.filter(Boolean).map((photo, index) => {
+              const loadsImmediately = photo.type === 'Flight';
+
+              return (
+                <figure className="exhibition-frame" key={photo.src} style={{ '--frame-index': index }}>
+                  <button
+                    aria-label={`Open ${photo.title}`}
+                    className="exhibition-frame__button"
+                    onClick={() => onOpenPhoto({ ...photo, group: group.title })}
+                    type="button"
+                  >
+                    <LazyImage
+                      alt={photo.title}
+                      loading={loadsImmediately ? 'eager' : 'lazy'}
+                      rootMargin="240px 620px"
+                      rootSelector={loadsImmediately ? undefined : '.exhibition-track'}
+                      sizes="(max-width: 620px) 72vw, (max-width: 980px) 46vw, 340px"
+                      src={photo.previewSrc ?? photo.src}
+                    />
+                  </button>
+                </figure>
+              );
+            })}
           </div>
         </section>
       );

@@ -1,4 +1,5 @@
 const picture = (file) => `/picture/${file}`;
+const versioned = (path, version) => (version ? `${path}?v=${version}` : path);
 
 export const heroPhoto = {
   src: picture('01-city-tower-blue-hour.jpg'),
@@ -39,8 +40,16 @@ export const exhibitionPhotos = [
   { src: picture('22-river-sunset-reflection.jpg'), title: 'Reflection Chain', type: 'Dusk' },
   { src: picture('23-pink-blossom-roadside.jpg'), title: 'Pink Signal', type: 'Nature' },
   { src: picture('24-urban-tower-stairway.jpg'), title: 'Urban Antenna', type: 'Urban' },
-  { src: picture('25-airplane-window-wing.jpg'), title: 'Window Layer', type: 'Flight' },
-  { src: picture('26-airplane-wing-blue-sky.jpg'), title: 'Blue Flight', type: 'Flight' },
+  {
+    src: versioned(picture('25-airplane-window-wing.jpg'), '20260429'),
+    title: 'Window Layer',
+    type: 'Flight',
+  },
+  {
+    src: versioned(picture('26-airplane-wing-blue-sky.jpg'), '20260429'),
+    title: 'Blue Flight',
+    type: 'Flight',
+  },
   { src: picture('27-brick-pagoda-tower.jpg'), title: 'Pagoda Stack', type: 'Heritage' },
   { src: picture('28-mountain-gorge-cliffs.jpg'), title: 'Gorge Depth', type: 'Travel' },
   { src: picture('29-arched-bridge-river-twilight.jpg'), title: 'Twilight Bridge', type: 'Urban' },

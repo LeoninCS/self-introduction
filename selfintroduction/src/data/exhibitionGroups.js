@@ -1,8 +1,9 @@
 const picture = (file) => `/picture/${file}`;
 const preview = (file) => `/picture/preview/${file.replace(/\.[^.]+$/, '.jpg')}`;
-const photo = (file, title, type) => ({
-  src: picture(file),
-  previewSrc: preview(file),
+const versioned = (path, version) => (version ? `${path}?v=${version}` : path);
+const photo = (file, title, type, options = {}) => ({
+  src: versioned(picture(file), options.version),
+  previewSrc: versioned(preview(file), options.version),
   title,
   type,
 });
@@ -32,8 +33,8 @@ const exhibitionPhotos = [
   photo('22-river-sunset-reflection.jpg', 'Reflection Chain', 'Dusk'),
   photo('23-pink-blossom-roadside.jpg', 'Pink Signal', 'Nature'),
   photo('24-urban-tower-stairway.jpg', 'Urban Antenna', 'Urban'),
-  photo('25-airplane-window-wing.jpg', 'Window Layer', 'Flight'),
-  photo('26-airplane-wing-blue-sky.jpg', 'Blue Flight', 'Flight'),
+  photo('25-airplane-window-wing.jpg', 'Window Layer', 'Flight', { version: '20260429' }),
+  photo('26-airplane-wing-blue-sky.jpg', 'Blue Flight', 'Flight', { version: '20260429' }),
   photo('27-brick-pagoda-tower.jpg', 'Pagoda Stack', 'Heritage'),
   photo('28-mountain-gorge-cliffs.jpg', 'Gorge Depth', 'Travel'),
   photo('29-arched-bridge-river-twilight.jpg', 'Twilight Bridge', 'Urban'),

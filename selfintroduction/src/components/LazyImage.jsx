@@ -25,8 +25,26 @@ const LazyImage = ({
   srcSet,
 }) => {
   const imageRef = useRef(null);
-  const [shouldLoad, setShouldLoad] = useState(false);
+  const [shouldLoad, setShouldLoad] = useState(loading === 'eager');
   const [isLoaded, setIsLoaded] = useState(false);
+
+  useEffect(() => {
+    if (loading === 'eager') {
+      setShouldLoad(true);
+    }
+  }, [loading]);
+
+  useEffect(() => {
+    setIsLoaded(false);
+  }, [src, srcSet]);
+
+  useEffect(() => {
+    const image = imageRef.current;
+
+    if (shouldLoad && image?.complete && image.naturalWidth > 0) {
+      setIsLoaded(true);
+    }
+  }, [shouldLoad, src, srcSet]);
 
   useEffect(() => {
     if (shouldLoad) {
@@ -69,7 +87,7 @@ const LazyImage = ({
       fetchPriority={fetchPriority}
       loading={loading}
       onLoad={() => {
-        if (shouldLoad) {
+        if (shouldLoad && imageRef.current?.naturalWidth > 0) {
           setIsLoaded(true);
         }
       }}
