@@ -1,3 +1,4 @@
+import { lazy, Suspense, useEffect, useState } from 'react';
 import {
   BadgeDollarSign,
   Bike,
@@ -5,7 +6,6 @@ import {
   BrainCircuit,
   Camera,
   Code2,
-  Disc3,
   ExternalLink,
   Github,
   Globe2,
@@ -19,9 +19,11 @@ import {
   TrendingUp,
   Trophy,
   Twitter,
+  X,
 } from 'lucide-react';
-import SectionTitle from '../components/SectionTitle';
+import DriftText from '../components/DriftText';
 import { profile } from '../data/profile';
+import ViewportMount from '../components/ViewportMount';
 
 const hobbyIcons = {
   acm: Trophy,
@@ -47,197 +49,292 @@ const platformIcons = {
   xiaohongshu: BookOpen,
 };
 
-const More = () => {
+const marketCodes = {
+  AAPL: 'AAPL',
+  BTC: 'BTC',
+  CVX: 'CVX',
+  ETH: 'ETH',
+  GOOGL: 'GOOGL',
+  KO: 'KO',
+  MSFT: 'MSFT',
+  MU: 'MU',
+  'Nasdaq 100': 'NDX',
+  'Nikkei 225': 'N225',
+  NVDA: 'NVDA',
+  'S&P 500': 'SPX',
+  USDT: 'USDT',
+};
+
+const marketMeta = {
+  Crypto: {
+    eyebrow: 'On-chain',
+    mode: 'Liquidity',
+  },
+  个股: {
+    eyebrow: 'Equity',
+    mode: 'Quality',
+  },
+  宽基指数: {
+    eyebrow: 'Macro',
+    mode: 'Beta',
+  },
+};
+
+const ExhibitionWall = lazy(() => import('./ExhibitionWall'));
+const SignalAlbums = lazy(() => import('./SignalAlbums'));
+
+const InlineFallback = ({ label }) => (
+  <div className="lazy-module-placeholder lazy-module-placeholder--active" aria-hidden="true">
+    <span>{label}</span>
+    <i />
+  </div>
+);
+
+const More = ({ sectionId = 'more' }) => {
+  const [activePhoto, setActivePhoto] = useState(null);
+  const featuredArtists = profile.music.artists.slice(0, 10);
+
+  useEffect(() => {
+    if (!activePhoto) {
+      return undefined;
+    }
+
+    const previousOverflow = document.body.style.overflow;
+    const handleKeyDown = (event) => {
+      if (event.key === 'Escape') {
+        setActivePhoto(null);
+      }
+    };
+
+    document.body.style.overflow = 'hidden';
+    window.addEventListener('keydown', handleKeyDown);
+
+    return () => {
+      document.body.style.overflow = previousOverflow;
+      window.removeEventListener('keydown', handleKeyDown);
+    };
+  }, [activePhoto]);
+
   return (
-    <section className="section more" id="more">
-      <SectionTitle eyebrow="Signal" title="个人信号">
-        <p>
-          这里放兴趣、音乐、理财观察、平台主页和联系方式，展示工程之外的长期关注。
-        </p>
-      </SectionTitle>
+    <section className="section signal-section more" id={sectionId ?? undefined}>
+      <div className="signal-hero reveal-block">
+        <span className="section-index">05</span>
+        <p className="eyebrow">Signal / Taste</p>
+        <h2>
+          <DriftText text="生活信号构成长期审美。" />
+        </h2>
+        <p>骑行、HiFi、摄影、音乐和资产观察，构成工程之外的个人气质。</p>
+      </div>
 
-      <div className="more__stack">
-        <div className="more__group">
-          <div className="more__group-heading">
-            <span>Life / Taste</span>
-            <strong>生活与审美</strong>
+      <div className="signal-installation reveal-block" aria-hidden="true">
+        <span>Private Index</span>
+        <strong>Ride / Sound / Frame / Markets</strong>
+        <i />
+        <i />
+      </div>
+
+      <div className="signal-grid">
+        <article className="signal-column signal-column--life">
+          <div className="signal-column__head">
+            <span>Life</span>
+            <strong>
+              <DriftText text="生活与审美" />
+            </strong>
           </div>
+          {profile.hobbies.map((hobby) => {
+            const Icon = hobbyIcons[hobby.icon];
 
-          <div className="hobby-grid">
-            {profile.hobbies.map((hobby) => {
-              const Icon = hobbyIcons[hobby.icon];
-
-              return (
-                <article className="hobby-card float-card" key={hobby.name}>
-                  <span className="hobby-card__icon">
-                    <Icon size={26} strokeWidth={2.1} />
-                  </span>
-                  <div>
-                    <h3>{hobby.name}</h3>
-                    <p>{hobby.description}</p>
-                    {hobby.href && (
-                      <a className="hobby-card__link" href={hobby.href} rel="noreferrer" target="_blank">
-                        View Instagram
-                        <ExternalLink size={15} />
-                      </a>
-                    )}
-                  </div>
-                </article>
-              );
-            })}
-          </div>
-        </div>
-
-        <article className="finance-panel float-card">
-          <div className="finance-panel__header">
-            <span className="finance-panel__icon">
-              <BadgeDollarSign size={24} />
-            </span>
-            <div>
-              <p>Finance Watchlist</p>
-              <h3>关注美股指数、Crypto 和优质个股</h3>
-            </div>
-          </div>
-          <div className="finance-panel__grid">
-            {profile.finance.map((group) => (
-              <div className="finance-panel__group" key={group.name}>
-                <strong>{group.name}</strong>
+            return (
+              <div className="signal-row" key={hobby.name}>
+                <span className="signal-row__icon">
+                  <Icon size={22} strokeWidth={2.1} />
+                </span>
                 <div>
-                  {group.items.map((item) => {
-                    const label = typeof item === 'string' ? item : item.label;
-                    const href = typeof item === 'string' ? undefined : item.href;
-
-                    return href ? (
-                      <a href={href} key={label} rel="noreferrer" target="_blank">
-                        {label}
-                      </a>
-                    ) : (
-                      <span key={label}>{label}</span>
-                    );
-                  })}
+                  <h3>
+                    <DriftText text={hobby.name} />
+                  </h3>
+                  <p>{hobby.description}</p>
+                  {hobby.href && (
+                    <a href={hobby.href} rel="noreferrer" target="_blank">
+                      View Instagram
+                      <ExternalLink size={15} />
+                    </a>
+                  )}
                 </div>
               </div>
+            );
+          })}
+        </article>
+
+        <article className="signal-column signal-column--music">
+          <div className="signal-column__head">
+            <span>Music</span>
+            <strong>
+              <DriftText text="声音偏好" />
+            </strong>
+          </div>
+          <div className="signal-marquee">
+            {[...profile.music.genres, ...featuredArtists].map((item) => (
+              <span key={item}>{item}</span>
             ))}
           </div>
+          <ViewportMount
+            className="lazy-content-anchor lazy-content-anchor--albums"
+            minHeight="520px"
+            placeholderLabel="Album Index"
+            rootMargin="420px 0px"
+          >
+            <Suspense fallback={<InlineFallback label="Album Index" />}>
+              <SignalAlbums />
+            </Suspense>
+          </ViewportMount>
         </article>
 
-        <article className="music-panel float-card">
-          <div className="music-panel__header">
-            <span className="music-panel__icon">
-              <Disc3 size={24} />
-            </span>
-            <div>
-              <p>Music Taste</p>
-              <h3>R&B、Jazz、Hip-Hop，以及一些反复听的艺术家和专辑。</h3>
-            </div>
+        <article className="signal-column signal-column--watch">
+          <div className="signal-column__head">
+            <span>Watchlist</span>
+            <strong>
+              <DriftText text="长期观察" />
+            </strong>
           </div>
+          <div className="market-terminal">
+            <div className="market-terminal__top">
+              <span>
+                <BadgeDollarSign size={16} />
+                Market Radar
+              </span>
+              <strong>
+                <DriftText mode="word" text="Index / Crypto / Equity" />
+              </strong>
+              <em>Long View</em>
+            </div>
 
-          <div className="music-panel__grid">
-            <div className="music-panel__group">
-              <strong>Genres</strong>
-              <div>
-                {profile.music.genres.map((item) => (
-                  <span key={item}>{item}</span>
-                ))}
-              </div>
-            </div>
-            <div className="music-panel__group">
-              <strong>Artists</strong>
-              <div>
-                {profile.music.artists.map((item) => (
-                  <span key={item}>{item}</span>
-                ))}
-              </div>
-            </div>
-            <div className="music-panel__group music-panel__group--albums">
-              <strong>中文专辑</strong>
-              <div>
-                {profile.music.chineseAlbums.map((item) => (
-                  <span key={item}>{item}</span>
-                ))}
-              </div>
-            </div>
-            <div className="music-panel__group music-panel__group--albums">
-              <strong>English Albums</strong>
-              <div>
-                {profile.music.englishAlbums.map((item) => (
-                  <span key={item}>{item}</span>
-                ))}
-              </div>
+            <div className="market-groups">
+              {profile.finance.map((group, groupIndex) => {
+                const meta = marketMeta[group.name];
+
+                return (
+                  <section className="market-group" key={group.name}>
+                    <div className="market-group__head">
+                      <span>{meta?.eyebrow ?? 'Watch'}</span>
+                      <strong>{group.name}</strong>
+                      <em>{meta?.mode ?? 'Signal'}</em>
+                    </div>
+
+                    <div className="market-list">
+                      {group.items.map((item, itemIndex) => {
+                        const label = typeof item === 'string' ? item : item.label;
+                        const href = typeof item === 'string' ? undefined : item.href;
+                        const AssetTag = href ? 'a' : 'div';
+
+                        return (
+                          <AssetTag
+                            className="market-asset"
+                            href={href}
+                            key={label}
+                            rel={href ? 'noreferrer' : undefined}
+                            style={{
+                              '--asset-index': itemIndex,
+                              '--group-index': groupIndex,
+                            }}
+                            target={href ? '_blank' : undefined}
+                          >
+                            <span className="market-asset__code">{marketCodes[label] ?? label}</span>
+                            <span className="market-asset__name">{label}</span>
+                            <span className="market-asset__spark" aria-hidden="true">
+                              <i />
+                              <i />
+                              <i />
+                              <i />
+                              <i />
+                            </span>
+                            {href && <ExternalLink size={14} />}
+                          </AssetTag>
+                        );
+                      })}
+                    </div>
+                  </section>
+                );
+              })}
             </div>
           </div>
         </article>
 
-        <div className="more__group">
-          <div className="more__group-heading">
-            <span>Online / Links</span>
-            <strong>外部坐标</strong>
+        <article className="signal-column signal-column--online">
+          <div className="signal-column__head">
+            <span>Online</span>
+            <strong>
+              <DriftText text="外部坐标" />
+            </strong>
           </div>
-
-          <div className="platform-grid">
+          <div className="signal-links">
             {profile.platforms.map((platform) => {
               const Icon = platformIcons[platform.icon];
 
               return (
-                <a
-                  className="platform-card float-card"
-                  href={platform.href}
-                  key={platform.name}
-                  rel="noreferrer"
-                  target="_blank"
-                >
-                  <span>
-                    <Icon size={22} />
-                    {platform.name}
-                  </span>
+                <a href={platform.href} key={platform.name} rel="noreferrer" target="_blank">
+                  <Icon size={18} />
+                  <span>{platform.name}</span>
                   <strong>{platform.label}</strong>
-                  <ExternalLink size={17} />
+                  <ExternalLink size={15} />
                 </a>
               );
             })}
           </div>
-        </div>
-
-        <div className="more__footer-grid">
-          <article className="ai-toolchain ai-toolchain--compact float-card">
-            <div className="ai-toolchain__header">
-              <span className="ai-toolchain__icon">
-                <BrainCircuit size={22} />
-              </span>
-              <div>
-                <p>AI Tools</p>
-                <h3>日常会使用 Codex、Claude Code、Gemini 等工具辅助开发和整理思路。</h3>
-              </div>
-            </div>
-            <div className="ai-toolchain__grid">
-              {profile.aiTools.map((tool) => (
-                <span className="ai-toolchain__chip" key={tool.name}>
-                  <strong>{tool.name}</strong>
-                </span>
-              ))}
-            </div>
-          </article>
-
-          <div className="more-contact">
-            <a className="float-card" href={`mailto:${profile.contact.email}`}>
-              <Mail size={20} />
-              {profile.contact.email}
-            </a>
-            <a className="float-card" href={`tel:${profile.contact.phone}`}>
-              <Phone size={20} />
-              {profile.contact.phone}
-            </a>
-            <a className="float-card" href={profile.contact.github} rel="noreferrer" target="_blank">
-              <Github size={20} />
-              GitHub
-            </a>
-            <span className="float-card">
-              <MapPin size={20} />
-              {profile.location}
-            </span>
-          </div>
-        </div>
+        </article>
       </div>
+
+      <ViewportMount
+        className="lazy-content-anchor lazy-content-anchor--exhibition"
+        minHeight="80vh"
+        placeholderLabel="Photography Archive"
+        rootMargin="520px 0px"
+      >
+        <Suspense fallback={<InlineFallback label="Photography Archive" />}>
+          <ExhibitionWall onOpenPhoto={setActivePhoto} />
+        </Suspense>
+      </ViewportMount>
+
+      {activePhoto && (
+        <div
+          aria-label={`${activePhoto.title} enlarged photo`}
+          aria-modal="true"
+          className="photo-lightbox"
+          onClick={() => setActivePhoto(null)}
+          role="dialog"
+        >
+          <figure className="photo-lightbox__figure" onClick={(event) => event.stopPropagation()}>
+            <button
+              aria-label="Close photo"
+              className="photo-lightbox__close"
+              onClick={() => setActivePhoto(null)}
+              type="button"
+            >
+              <X size={20} />
+            </button>
+            <img alt={activePhoto.title} decoding="async" src={activePhoto.src} />
+          </figure>
+        </div>
+      )}
+
+      <footer className="finale-contact reveal-block">
+        <a href={`mailto:${profile.contact.email}`}>
+          <Mail size={19} />
+          {profile.contact.email}
+        </a>
+        <a href={`tel:${profile.contact.phone}`}>
+          <Phone size={19} />
+          {profile.contact.phone}
+        </a>
+        <a href={profile.contact.github} rel="noreferrer" target="_blank">
+          <Github size={19} />
+          GitHub
+        </a>
+        <span>
+          <MapPin size={19} />
+          {profile.location}
+        </span>
+      </footer>
     </section>
   );
 };

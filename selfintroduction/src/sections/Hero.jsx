@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
-import MagicButton from '../components/MagicButton';
-import ProfileVisual from '../components/ProfileVisual';
+import { ArrowDownRight, Github, Mail } from 'lucide-react';
+import DriftText from '../components/DriftText';
 import { profile } from '../data/profile';
 
 const navItems = [
@@ -11,22 +11,40 @@ const navItems = [
   { id: 'more', label: 'Signal' },
 ];
 
-const getAnchorOffset = () => Math.min(Math.max(window.innerHeight * 0.065, 58), 82);
+const anchorSelector = [
+  '.story-sticky',
+  '.capability-stage__sticky',
+  '.section-head',
+  '.signal-hero',
+  '.section-title',
+].join(', ');
+
+const getAnchorOffset = () => {
+  const nav = document.querySelector('.nav');
+  const navBottom = nav?.getBoundingClientRect().bottom ?? 72;
+
+  return Math.round(Math.min(Math.max(navBottom + 24, 92), 132));
+};
 
 const getElementTop = (element) => element.getBoundingClientRect().top + window.scrollY;
 
-const getSectionAnchorElement = (section) => section.querySelector('.section-title') ?? section;
+const getSectionAnchorElement = (section) => section.querySelector(anchorSelector) ?? section;
+
+const getNavSections = () => navItems.map((item) => document.getElementById(item.id)).filter(Boolean);
 
 const Hero = () => {
   const [activeSection, setActiveSection] = useState(navItems[0].id);
+  const identityItems = [
+    { label: 'School', value: `${profile.education.school} / ${profile.education.major}` },
+    { label: 'Cloud', value: profile.experience[0].company },
+    { label: 'Contest', value: profile.education.group },
+  ];
 
   useEffect(() => {
-    const sections = navItems
-      .map((item) => document.getElementById(item.id))
-      .filter(Boolean);
     let frameId;
 
     const updateActiveSection = () => {
+      const sections = getNavSections();
       const anchorLine = window.scrollY + getAnchorOffset() + 4;
       const currentSection = sections.reduce((current, section) => {
         if (getElementTop(getSectionAnchorElement(section)) <= anchorLine) {
@@ -49,6 +67,12 @@ const Hero = () => {
     };
 
     updateActiveSection();
+    const mutationObserver = new MutationObserver(handleScroll);
+    mutationObserver.observe(document.querySelector('.site-content') ?? document.body, {
+      childList: true,
+      subtree: true,
+    });
+
     window.addEventListener('scroll', handleScroll, { passive: true });
     window.addEventListener('resize', handleScroll);
 
@@ -57,6 +81,7 @@ const Hero = () => {
         window.cancelAnimationFrame(frameId);
       }
 
+      mutationObserver.disconnect();
       window.removeEventListener('scroll', handleScroll);
       window.removeEventListener('resize', handleScroll);
     };
@@ -70,12 +95,23 @@ const Hero = () => {
     }
 
     setActiveSection(sectionId);
-    const anchorElement = getSectionAnchorElement(section);
+    const scrollToSection = (behavior = 'smooth') => {
+      const latestSection = document.getElementById(sectionId);
 
-    window.scrollTo({
-      behavior: 'smooth',
-      top: sectionId === 'home' ? 0 : Math.max(getElementTop(anchorElement) - getAnchorOffset(), 0),
-    });
+      if (!latestSection) {
+        return;
+      }
+
+      const anchorElement = getSectionAnchorElement(latestSection);
+
+      window.scrollTo({
+        behavior,
+        top: sectionId === 'home' ? 0 : Math.max(getElementTop(anchorElement) - getAnchorOffset(), 0),
+      });
+    };
+
+    scrollToSection();
+    window.setTimeout(() => scrollToSection('smooth'), 420);
   };
 
   return (
@@ -96,21 +132,122 @@ const Hero = () => {
         ))}
       </nav>
 
-      <div className="hero__layout">
-        <div className="hero__content">
-          <p className="eyebrow">Personal Website</p>
-          <h1 data-title={profile.name}>{profile.name}</h1>
-          <p className="hero__intro">{profile.intro}</p>
+      <div className="hero__scene" aria-hidden="true">
+        <span />
+        <span />
+        <span />
+      </div>
 
+      <div className="hero__kinetic motion-reveal" aria-hidden="true">
+        <span />
+        <span />
+        <span />
+        <span />
+      </div>
+
+      <div className="hero__masthead reveal-block">
+        <p className="eyebrow">Personal Showcase / {profile.role}</p>
+        <h1 data-title={profile.name}>
+          <DriftText text={profile.name} />
+        </h1>
+
+        <div className="hero__statement">
+          <p>{profile.intro}</p>
           <div className="hero__actions" aria-label="Primary actions">
-            <MagicButton href={`mailto:${profile.contact.email}`}>联系我</MagicButton>
-            <MagicButton href={profile.contact.github}>GitHub</MagicButton>
+            <a className="hero__action" href={`mailto:${profile.contact.email}`}>
+              <Mail size={18} />
+              联系我
+            </a>
+            <a className="hero__action" href={profile.contact.github} rel="noreferrer" target="_blank">
+              <Github size={18} />
+              GitHub
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div className="hero__atelier reveal-block" aria-hidden="true">
+        <span>Edition 2026</span>
+        <i />
+        <strong>Systems / Taste / Motion</strong>
+      </div>
+
+      <div className="hero__lower">
+        <div className="hero__index reveal-block">
+          <span>01</span>
+          <strong>{profile.realName}</strong>
+          <p>
+            {profile.education.school} / {profile.location}
+          </p>
+          <div className="hero__index-meta" aria-label="Identity highlights">
+            {identityItems.map((item) => (
+              <span key={item.label}>
+                <em>{item.label}</em>
+                <strong>{item.value}</strong>
+              </span>
+            ))}
           </div>
         </div>
 
-        <ProfileVisual />
+        <aside className="hero__visual-canvas reveal-block" aria-label="Profile signals">
+          <div className="hero__orbital" aria-hidden="true">
+            <span />
+            <span />
+            <span />
+          </div>
+
+          <div className="hero__system-board" aria-hidden="true">
+            <span>ACTIVE</span>
+            <strong>
+              <DriftText mode="word" text="BUILD MODE" />
+            </strong>
+            <i />
+            <img
+              alt=""
+              className="hero__build-avatar"
+              decoding="async"
+              loading="lazy"
+              referrerPolicy="no-referrer"
+              src="https://github.com/LeoninCS.png"
+            />
+          </div>
+
+          <div className="hero__node-field" aria-hidden="true">
+            <span />
+            <span />
+            <span />
+            <span />
+            <span />
+          </div>
+
+          <div className="hero__circuit motion-reveal" aria-hidden="true">
+            <span />
+            <span />
+            <span />
+            <span />
+          </div>
+
+          <div className="hero__signal-stack">
+            {profile.visualSignals.map((signal) => (
+              <span key={signal.label} style={{ '--signal': signal.value }}>
+                <strong>{signal.label}</strong>
+                <i />
+                <em>{signal.value}</em>
+              </span>
+            ))}
+          </div>
+
+          <div className="hero__ticker" aria-label="Highlights">
+            {profile.highlights.map((item) => (
+              <span key={item}>{item}</span>
+            ))}
+          </div>
+        </aside>
       </div>
 
+      <a className="hero__scroll" href="#about" aria-label="Scroll to about">
+        <ArrowDownRight size={20} />
+      </a>
     </header>
   );
 };
