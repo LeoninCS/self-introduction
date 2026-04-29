@@ -309,7 +309,6 @@ export const profile = {
   ],
   contact: {
     email: 'xianchaoqian@foxmail.com',
-    phone: '17638336529',
     github: 'https://github.com/LeoninCS',
   },
 };

@@ -13,7 +13,6 @@ import {
   Instagram,
   Mail,
   MapPin,
-  Phone,
   PlaySquare,
   Share2,
   TrendingUp,
@@ -321,10 +320,6 @@ const More = ({ sectionId = 'more' }) => {
         <a href={`mailto:${profile.contact.email}`}>
           <Mail size={19} />
           {profile.contact.email}
-        </a>
-        <a href={`tel:${profile.contact.phone}`}>
-          <Phone size={19} />
-          {profile.contact.phone}
         </a>
         <a href={profile.contact.github} rel="noreferrer" target="_blank">
           <Github size={19} />
