@@ -90,12 +90,10 @@ export const exhibitionGroups = [
   },
   {
     title: 'Mobility',
-    meta: 'Ride / Flight / Route',
+    meta: 'Ride / Route / Campus',
     photos: [
       'Race Frame',
       'Museum Checkpoint',
-      'Window Layer',
-      'Blue Flight',
       'Campus Ride',
       'Coastal Ride',
     ].map((title) => byTitle.get(title)),
@@ -143,8 +141,10 @@ export const exhibitionGroups = [
   },
   {
     title: 'ICPC Shenzhen Invitational',
-    meta: 'Contest / Invitational / Team',
+    meta: 'Contest / Invitational / Flight',
     photos: [
+      'Window Layer',
+      'Blue Flight',
       'Shenzhen Invitational 01',
       'Shenzhen Invitational 02',
       'Shenzhen Invitational 03',
