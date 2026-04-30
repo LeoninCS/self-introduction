@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { ArrowDownRight, Github, Mail } from 'lucide-react';
+import { Github, Mail } from 'lucide-react';
 import DriftText from '../components/DriftText';
 import { profile } from '../data/profile';
 
@@ -148,18 +148,18 @@ const Hero = () => {
       <div className="hero__masthead reveal-block">
         <p className="eyebrow">Personal Showcase / {profile.role}</p>
         <h1 data-title={profile.name}>
-          <DriftText text={profile.name} />
+          <DriftText mode="char" text={profile.name} />
         </h1>
 
         <div className="hero__statement">
           <p>{profile.intro}</p>
           <div className="hero__actions" aria-label="Primary actions">
             <a className="hero__action" href={`mailto:${profile.contact.email}`}>
-              <Mail size={18} />
+              <Mail size={22} />
               联系我
             </a>
             <a className="hero__action" href={profile.contact.github} rel="noreferrer" target="_blank">
-              <Github size={18} />
+              <Github size={22} />
               GitHub
             </a>
           </div>
@@ -244,10 +244,6 @@ const Hero = () => {
           </div>
         </aside>
       </div>
-
-      <a className="hero__scroll" href="#about" aria-label="Scroll to about">
-        <ArrowDownRight size={20} />
-      </a>
     </header>
   );
 };

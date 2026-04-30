@@ -31,7 +31,7 @@ const About = ({ sectionId = 'about' }) => {
           <span className="section-index">02</span>
           <p className="eyebrow">About / Profile</p>
           <h2>
-            <DriftText text="在工程能力和长期审美之间建立稳定输出。" />
+            <DriftText text="工程能力与长期审美" />
           </h2>
           <p>
             {profile.realName}，{profile.education.school}

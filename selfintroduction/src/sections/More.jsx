@@ -1,4 +1,5 @@
 import { lazy, Suspense, useEffect, useState } from 'react';
+import { createPortal } from 'react-dom';
 import {
   BadgeDollarSign,
   Bike,
@@ -295,27 +296,29 @@ const More = ({ sectionId = 'more' }) => {
         </Suspense>
       </ViewportMount>
 
-      {activePhoto && (
-        <div
-          aria-label={`${activePhoto.title} enlarged photo`}
-          aria-modal="true"
-          className="photo-lightbox"
-          onClick={() => setActivePhoto(null)}
-          role="dialog"
-        >
-          <figure className="photo-lightbox__figure" onClick={(event) => event.stopPropagation()}>
-            <button
-              aria-label="Close photo"
-              className="photo-lightbox__close"
-              onClick={() => setActivePhoto(null)}
-              type="button"
-            >
-              <X size={20} />
-            </button>
-            <img alt={activePhoto.title} decoding="async" src={activePhoto.src} />
-          </figure>
-        </div>
-      )}
+      {activePhoto &&
+        createPortal(
+          <div
+            aria-label={`${activePhoto.title} enlarged photo`}
+            aria-modal="true"
+            className="photo-lightbox"
+            onClick={() => setActivePhoto(null)}
+            role="dialog"
+          >
+            <figure className="photo-lightbox__figure" onClick={(event) => event.stopPropagation()}>
+              <button
+                aria-label="Close photo"
+                className="photo-lightbox__close"
+                onClick={() => setActivePhoto(null)}
+                type="button"
+              >
+                <X size={20} />
+              </button>
+              <img alt={activePhoto.title} decoding="async" src={activePhoto.src} />
+            </figure>
+          </div>,
+          document.body,
+        )}
 
       <footer className="finale-contact reveal-block">
         <a href={`mailto:${profile.contact.email}`}>

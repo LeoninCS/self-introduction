@@ -37,10 +37,10 @@ const Skills = ({ sectionId = 'tech' }) => {
           <span className="section-index">03</span>
           <p className="eyebrow">Tech / Capability</p>
           <h2>
-            <DriftText text="以 Go 和 Python 工程能力为核心，向云原生、Agent 与产品实现延展。" />
+            <DriftText mode="word" text="Go/Python 云原生实践" />
           </h2>
           <p>
-            技术栈在页面里以能力光谱呈现，滚动时逐条展开，形成更强的展览感和节奏感。
+            围绕后端工程、云原生与 AI Agent，持续积累可落地的系统实践。
           </p>
         </div>
 

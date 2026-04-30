@@ -17,7 +17,6 @@ const tiltCardSelector = [
   '.capability-row',
   '.project-strip',
   '.signal-column',
-  '.market-asset',
   '.album-cover',
   '.exhibition-frame',
 ].join(', ');
@@ -28,7 +27,6 @@ const pressCardSelector = [
   '.capability-row',
   '.project-strip',
   '.signal-column',
-  '.market-asset',
 ].join(', ');
 const About = lazy(() => import('./sections/About'));
 const Skills = lazy(() => import('./sections/Skills'));
