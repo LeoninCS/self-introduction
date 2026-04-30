@@ -175,6 +175,7 @@ export const profile = {
       items: [
         { label: 'KO', href: 'https://finance.yahoo.com/quote/KO/' },
         { label: 'NVDA', href: 'https://finance.yahoo.com/quote/NVDA/' },
+        { label: 'TSM', href: 'https://finance.yahoo.com/quote/TSM/' },
         { label: 'AAPL', href: 'https://finance.yahoo.com/quote/AAPL/' },
         { label: 'MSFT', href: 'https://finance.yahoo.com/quote/MSFT/' },
         { label: 'GOOGL', href: 'https://finance.yahoo.com/quote/GOOGL/' },
@@ -305,7 +306,7 @@ export const profile = {
   ],
   achievements: [
     'LeetCode 2100 分 / Codeforces 1653 分 / 累计刷题 1500+',
-    'CET-6 / 全网 1000+ 粉丝 / GitHub 200+ Star',
+    'CET-6 / 全网 1000+ 粉丝 / GitHub 250+ Star',
   ],
   contact: {
     email: 'xianchaoqian@foxmail.com',

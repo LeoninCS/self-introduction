@@ -61,6 +61,7 @@ const marketCodes = {
   'Nikkei 225': 'N225',
   NVDA: 'NVDA',
   'S&P 500': 'SPX',
+  TSM: 'TSM',
   USDT: 'USDT',
 };
 
