@@ -4,15 +4,17 @@ export const profile = {
   role: 'Backend Developer Intern',
   location: 'Hangzhou, China',
   intro:
-    '河南大学软件工程本科在读，目前在环界云计算做后端开发实习。平时主要写 Go，也会做一些前端、云原生、分布式、Agent 和 Blockchain 相关的探索。',
+    '河南大学软件工程本科在读，目前在环界云计算做后端开发实习。平时主要写 Go 和 Python，也会做一些前端、云原生、分布式、Agent 和 Blockchain 相关的探索。',
   highlights: [
     'Go Backend',
+    'LangChain / LangGraph',
     'Cloud Native / Sealos',
     'Agent / Blockchain',
     'Vibe Coding',
   ],
   visualSignals: [
     { label: 'Go', value: '92%' },
+    { label: 'Python', value: '84%' },
     { label: 'Cloud', value: '86%' },
     { label: 'AI', value: '82%' },
   ],
@@ -48,6 +50,12 @@ export const profile = {
       icon: 'go',
       repo: 'https://github.com/golang/go',
       description: '主要使用语言，偏后端服务和工程实践',
+    },
+    {
+      name: 'Python Agent / LangGraph',
+      icon: 'python',
+      repo: 'https://github.com/langchain-ai/langgraph',
+      description: '用 Python、LangChain 和 LangGraph 开发 AI Agent 工作流',
     },
     {
       name: 'Vue / React Full Stack',

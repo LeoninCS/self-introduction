@@ -23,6 +23,7 @@ const icons = {
   frontend: Code2,
   go: Server,
   opensource: Boxes,
+  python: Code2,
   web3: Blocks,
   container: Container,
   code: Code2,
@@ -36,7 +37,7 @@ const Skills = ({ sectionId = 'tech' }) => {
           <span className="section-index">03</span>
           <p className="eyebrow">Tech / Capability</p>
           <h2>
-            <DriftText text="以 Go 后端为核心，向云原生、Agent 与产品实现延展。" />
+            <DriftText text="以 Go 和 Python 工程能力为核心，向云原生、Agent 与产品实现延展。" />
           </h2>
           <p>
             技术栈在页面里以能力光谱呈现，滚动时逐条展开，形成更强的展览感和节奏感。
@@ -46,7 +47,7 @@ const Skills = ({ sectionId = 'tech' }) => {
         <div className="capability-list">
           <div className="capability-atelier reveal-block" aria-hidden="true">
             <span>Material Study</span>
-            <strong>Go / Cloud Native / Agentic Systems</strong>
+            <strong>Go / Python / Cloud Native / Agentic Systems</strong>
             <i />
             <i />
             <i />
