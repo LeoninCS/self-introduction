@@ -24,17 +24,17 @@ jobs:
         with:
           node-version: 22
           cache: npm
-          cache-dependency-path: selfintroduction/package-lock.json
+          cache-dependency-path: selfintrudution/package-lock.json
 
       - run: npm ci
-        working-directory: selfintroduction
+        working-directory: selfintrudution
 
       - run: npm run build
-        working-directory: selfintroduction
+        working-directory: selfintrudution
 
       - uses: actions/upload-pages-artifact@v3
         with:
-          path: selfintroduction/dist
+          path: selfintrudution/dist
 
   deploy:
     environment:
