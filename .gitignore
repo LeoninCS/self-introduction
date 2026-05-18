@@ -20,3 +20,45 @@ pnpm-debug.log*
 
 # System files
 .DS_Store
+
+# Local reference/source material
+itomdev.com/
+myself/
+selfintrudution/scripts/restore-original-dist.cjs
+
+# Extra unselected gallery images
+selfintrudution/public/picture/04-red-lantern-night-market.jpg
+selfintrudution/public/picture/05-spring-blossom-sky.jpg
+selfintrudution/public/picture/08-white-blossom-trees.jpg
+selfintrudution/public/picture/10-colorful-prayer-canopy.jpg
+selfintrudution/public/picture/11-forest-hiking-trail.jpg
+selfintrudution/public/picture/12-snow-mountain-valley.jpg
+selfintrudution/public/picture/14-sea-bridge-misty-coast.jpg
+selfintrudution/public/picture/15-road-bike-modern-museum.jpg
+selfintrudution/public/picture/17-lakeside-silhouette-sunset.jpg
+selfintrudution/public/picture/18-palm-coast-sunset.jpg
+selfintrudution/public/picture/20-arch-bridge-sunset-blur.jpg
+selfintrudution/public/picture/22-river-sunset-reflection.jpg
+selfintrudution/public/picture/23-pink-blossom-roadside.jpg
+selfintrudution/public/picture/24-urban-tower-stairway.jpg
+selfintrudution/public/picture/25-airplane-window-wing.jpg
+selfintrudution/public/picture/26-airplane-wing-blue-sky.jpg
+selfintrudution/public/picture/27-brick-pagoda-tower.jpg
+selfintrudution/public/picture/28-mountain-gorge-cliffs.jpg
+selfintrudution/public/picture/29-arched-bridge-river-twilight.jpg
+selfintrudution/public/picture/30-city-gate-waterfront.jpg
+selfintrudution/public/picture/31-pink-lotus-closeup.jpg
+selfintrudution/public/picture/32-white-lotus-closeup.jpg
+selfintrudution/public/picture/33-winter-tree-lined-road.jpg
+selfintrudution/public/picture/34-heritage-gate-evening.jpg
+selfintrudution/public/picture/36-park-blossom-tree.jpg
+selfintrudution/public/picture/37-bike-campus-building.jpg
+selfintrudution/public/picture/39-monochrome-forest-shadows.jpg
+selfintrudution/public/picture/43-icpc-shenzhen-invitational-02.jpg
+selfintrudution/public/picture/44-icpc-shenzhen-invitational-03.jpg
+selfintrudution/public/picture/45-icpc-shenzhen-invitational-04.jpg
+selfintrudution/public/picture/47-icpc-wuhan-regional-02.jpg
+selfintrudution/public/picture/48-icpc-wuhan-regional-03.jpg
+selfintrudution/public/picture/49-icpc-wuhan-regional-04.jpg
+selfintrudution/public/picture/50-icpc-wuhan-regional-05.jpg
+selfintrudution/public/picture/51-icpc-wuhan-regional-06.png
