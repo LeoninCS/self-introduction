@@ -1,0 +1,262 @@
+<!doctype html>
+<html lang="zh-CN">
+
+<head>
+  <meta charset="UTF-8" />
+  <link rel="preload" as="image" href="textures/paper-texture.webp" type="image/webp" fetchpriority="high"
+    crossorigin="anonymous">
+  <link rel="icon" type="image/png" href="favico.png" />
+  <link rel="apple-touch-icon" href="favico.png" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#fafafa" />
+
+  <title>献超前 | LeoninCS 后端开发实习生简历</title>
+  <meta name="description"
+    content="献超前 / LeoninCS 的交互式 3D 简历站，突出后端开发实习经历、联系方式、奖项竞赛、Go 后端、Kubernetes、Sealos、AI Agent 和项目经历。" />
+  <meta name="author" content="LeoninCS, Xianchao Qian, 献超前" />
+  <meta name="keywords"
+    content="LeoninCS, 献超前, Xianchao Qian, 后端开发实习生, Go, Kubernetes, Sealos, AI Agent, LangGraph, Redis, MQ, Raft, Codeforces, LeetCode, ICPC, 摄影展览" />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="index.html" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="献超前 | LeoninCS 后端开发实习生简历" />
+  <meta property="og:description"
+    content="面向简历投递的交互式 3D 个人空间，集中展示联系方式、实习经历、奖项竞赛、技术栈和项目经历。" />
+  <meta property="og:url" content="https://github.com/LeoninCS" />
+  <meta property="og:site_name" content="献超前简历站" />
+  <meta property="og:image" content="picture/01-city-tower-blue-hour.jpg" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:locale" content="zh_CN" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="献超前 | LeoninCS 后端开发实习生简历" />
+  <meta name="twitter:description" content="交互式 3D 简历站，包含联系方式、实习经历、奖项竞赛、技术栈、项目经历和摄影展览。" />
+  <meta name="twitter:image" content="picture/01-city-tower-blue-hour.jpg" />
+
+  <script type="application/ld+json">
+    [
+      {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "name": "Xianchao Qian",
+        "alternateName": ["LeoninCS", "献超前"],
+        "jobTitle": "后端开发实习生",
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "杭州",
+          "addressCountry": "CN"
+        },
+        "alumniOf": {
+          "@type": "CollegeOrUniversity",
+          "name": "河南大学"
+        },
+        "award": [
+          "LeetCode 2100",
+          "Codeforces 1653",
+          "1500+ Problems",
+          "河南大学 ACM 集训队",
+          "ICPC 现场经验"
+        ],
+        "knowsAbout": [
+          "Go",
+          "Python",
+          "后端工程",
+          "Kubernetes",
+          "Sealos",
+          "Redis",
+          "MQ",
+          "Raft",
+          "分布式系统",
+          "AI Agent",
+          "LangGraph",
+          "Agent Workflow",
+          "算法训练",
+          "摄影"
+        ],
+        "sameAs": [
+          "https://github.com/LeoninCS",
+          "https://x.com/xxxmvp2",
+          "https://space.bilibili.com/491359383",
+          "https://www.instagram.com/forever_mvp0?igsh=MXhnNjA3ZjFkbTZwbg=="
+        ],
+        "email": "mailto:xianchaoqian@foxmail.com"
+      },
+      {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "name": "献超前 3D 简历站",
+        "description": "献超前 / LeoninCS 的交互式 3D 简历站，展示后端开发实习经历、奖项竞赛、技术栈和项目经历。"
+      },
+      {
+        "@context": "https://schema.org",
+        "@type": "ImageGallery",
+        "name": "LeoninCS 摄影展览",
+        "image": [
+          "picture/01-city-tower-blue-hour.jpg",
+          "picture/02-riverside-lit-bridge-night.jpg",
+          "picture/03-fireworks-over-palace-gate.jpg",
+          "picture/07-blossom-branches-spring.jpg",
+          "picture/13-mountain-lake-prayer-flags.jpg",
+          "picture/16-lake-sunset-wide.jpg",
+          "picture/19-canyon-river-overlook.jpg",
+          "picture/41-lit-pagoda-dusk.jpg"
+        ]
+      }
+    ]
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;500;600;700&family=Gloria+Hallelujah&family=Inter:wght@300;400;500;600;700&display=swap"
+    rel="stylesheet">
+
+  <style>
+    .sr-only-seo {
+      position: absolute !important;
+      width: 1px !important;
+      height: 1px !important;
+      padding: 0 !important;
+      margin: -1px !important;
+      overflow: hidden !important;
+      clip: rect(0, 0, 0, 0) !important;
+      white-space: nowrap !important;
+      border: 0 !important;
+    }
+  </style>
+  <script type="module" crossorigin src="assets/index-DV-1WFZA.js"></script>
+  <link rel="stylesheet" crossorigin href="assets/index-7YSu33UF.css">
+</head>
+
+<body>
+  <div id="seo-content" class="sr-only-seo">
+    <header>
+      <h1>献超前 / LeoninCS | 后端开发实习生简历</h1>
+      <p>河南大学软件工程本科在读，常驻杭州，求职方向为后端开发、云原生平台和 AI Agent 工程。</p>
+    </header>
+
+    <nav aria-label="简历导航">
+      <ul>
+        <li><a href="#profile">简历速览</a></li>
+        <li><a href="#contact">联系方式</a></li>
+        <li><a href="#internship">实习经历</a></li>
+        <li><a href="#awards">奖项竞赛</a></li>
+        <li><a href="#skills">技术栈</a></li>
+        <li><a href="#engineering-projects">项目经历</a></li>
+        <li><a href="#interests">兴趣与摄影展览</a></li>
+      </ul>
+    </nav>
+
+    <main>
+      <article id="profile">
+        <h2>简历速览</h2>
+        <p><strong>姓名：</strong>献超前 / Xianchao Qian；<strong>技术 ID：</strong>LeoninCS；<strong>身份：</strong>河南大学软件工程本科在读，后端开发实习生。</p>
+        <p><strong>所在地：</strong>杭州，中国；<strong>方向：</strong>Go 后端、云原生平台、Kubernetes、Sealos、AI Agent、分布式系统和开源协作。</p>
+      </article>
+
+      <article id="contact">
+        <h2>联系方式</h2>
+        <p>简历投递、实习沟通、项目交流和开源协作可以通过以下入口联系。</p>
+        <ul>
+          <li><strong>邮箱：</strong><a href="mailto:xianchaoqian@foxmail.com">xianchaoqian@foxmail.com</a></li>
+          <li><strong>GitHub：</strong><a href="https://github.com/LeoninCS">github.com/LeoninCS</a></li>
+          <li><strong>X：</strong><a href="https://x.com/xxxmvp2">x.com/xxxmvp2</a></li>
+          <li><strong>Bilibili：</strong><a href="https://space.bilibili.com/491359383">space.bilibili.com/491359383</a></li>
+          <li><strong>Instagram：</strong><a href="https://www.instagram.com/forever_mvp0?igsh=MXhnNjA3ZjFkbTZwbg==">forever_mvp0</a></li>
+          <li><strong>小红书：</strong><a href="https://xhslink.com/m/68F5FSoWMxt">xhslink.com/m/68F5FSoWMxt</a></li>
+        </ul>
+      </article>
+
+      <article id="internship">
+        <h2>实习经历</h2>
+        <p>后端开发实习经历覆盖接口开发、日志排查、指标观察、问题拆解、测试补充和服务稳定性建设。</p>
+        <p>工程习惯强调需求拆解、边界条件、可观测性、代码质量、PR 沟通和持续复盘。</p>
+      </article>
+
+      <article id="awards">
+        <h2>奖项竞赛</h2>
+        <ul>
+          <li>LeetCode 2100，长期算法训练记录。</li>
+          <li>Codeforces 1653，竞赛能力记录。</li>
+          <li>累计 1500+ Problems，持续刷题与复盘。</li>
+          <li>河南大学 ACM 集训队，具备 ICPC 现场经验。</li>
+        </ul>
+      </article>
+
+      <article id="skills">
+        <h2>技术栈</h2>
+        <p>核心技术包含 Go、Python、React、Three.js、Kubernetes、Sealos、Redis、MQ、LangGraph、Agent Workflow、Raft 和分布式系统。</p>
+        <p>后端方向关注接口设计、缓存策略、消息队列、并发场景、服务稳定性、集群平台和自动化运维。</p>
+      </article>
+
+      <article id="engineering-projects">
+        <h2>项目经历</h2>
+        <section>
+          <h3>GoClub</h3>
+          <p>Go 语言俱乐部是开源社区项目，围绕 Go 后端工程、内容组织、协作工具和技术分享沉淀长期价值。</p>
+          <a href="https://goclub.space/">GoClub 主页</a>
+        </section>
+        <section>
+          <h3>Feed System</h3>
+          <p>视频 Feed 流系统关注内容流接口、缓存策略、分页链路、消息队列和高并发场景下的服务稳定性。</p>
+          <a href="https://github.com/LeoninCS/feedsystem_video_go">Feed System 项目仓库</a>
+        </section>
+        <section>
+          <h3>Agent Flow</h3>
+          <p>多智能体工作流助手基于 LangGraph 思路，探索任务编排、工具调用、状态流转和工程化落地。</p>
+          <a href="https://github.com/LeoninCS/multi-agent-workflow-assistant">Agent Flow 项目仓库</a>
+        </section>
+        <section>
+          <h3>Sealos AIOps</h3>
+          <p>Sealos AIOps 与集群合规实践围绕 Kubernetes 平台、巡检、合规扫描、自动化运维和云原生工程展开。</p>
+          <a href="https://github.com/labring/sealos">Sealos 项目仓库</a>
+        </section>
+      </article>
+
+      <article id="interests">
+        <h2>兴趣与摄影展览</h2>
+        <p>长期兴趣包含摄影、骑行、音乐 HiFi、R&amp;B、Jazz、Hip-Hop、Pop、投资观察和商业模式研究。骑行累计 10000+ 公里，照片集中展示在摄影展览区域。</p>
+      </article>
+
+      <article id="photography-exhibition">
+        <h2>摄影展览</h2>
+        <p>照片集中展示在摄影展览记录中，主题包含城市蓝调、河岸夜景、古建烟花、春日花枝、山野旅行、湖畔落日、峡谷河流和古塔暮色。</p>
+        <figure>
+          <img src="picture/01-city-tower-blue-hour.jpg" alt="城市塔楼蓝调时刻" />
+          <figcaption>城市蓝调</figcaption>
+        </figure>
+        <figure>
+          <img src="picture/02-riverside-lit-bridge-night.jpg" alt="河岸灯桥夜景" />
+          <figcaption>河岸灯桥</figcaption>
+        </figure>
+        <figure>
+          <img src="picture/03-fireworks-over-palace-gate.jpg" alt="城门上空的烟花" />
+          <figcaption>烟花与城门</figcaption>
+        </figure>
+        <figure>
+          <img src="picture/07-blossom-branches-spring.jpg" alt="春日花枝" />
+          <figcaption>春日花枝</figcaption>
+        </figure>
+        <figure>
+          <img src="picture/13-mountain-lake-prayer-flags.jpg" alt="山湖与经幡" />
+          <figcaption>山湖与经幡</figcaption>
+        </figure>
+        <figure>
+          <img src="picture/16-lake-sunset-wide.jpg" alt="湖畔落日" />
+          <figcaption>湖畔落日</figcaption>
+        </figure>
+      </article>
+
+    </main>
+  </div>
+
+  <noscript>
+    请启用 JavaScript 体验献超前的交互式 3D 简历站。
+  </noscript>
+
+  <div id="root"></div>
+</body>
+
+</html>

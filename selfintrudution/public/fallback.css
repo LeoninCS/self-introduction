@@ -1,0 +1,668 @@
+:root {
+  --fb-ink: #171717;
+  --fb-paper: #fffaf0;
+  --fb-wall: #f4f0e8;
+  --fb-accent: #5fab6a;
+  --fb-shadow: rgba(20, 20, 20, 0.18);
+}
+
+.fallback-site {
+  position: fixed;
+  inset: 0;
+  z-index: 220;
+  overflow: hidden;
+  color: var(--fb-ink);
+  background:
+    radial-gradient(circle at 50% 18%, rgba(255, 255, 255, 0.72), transparent 30%),
+    url("/textures/paper-texture.webp") center / cover,
+    var(--fb-wall);
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  touch-action: none;
+}
+
+.fallback-site::before {
+  position: absolute;
+  inset: 0;
+  content: "";
+  opacity: 0.18;
+  background-image:
+    linear-gradient(rgba(23, 23, 23, 0.08) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(23, 23, 23, 0.06) 1px, transparent 1px);
+  background-size: 52px 52px;
+  pointer-events: none;
+}
+
+.fallback-wall {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(to bottom, transparent 0 58%, rgba(0, 0, 0, 0.08) 58% 59%, transparent 59%),
+    url("/textures/entrance/wall_bricks_2.webp") center 38% / min(1320px, 130vw) auto no-repeat;
+  opacity: 0.58;
+  pointer-events: none;
+}
+
+.fallback-arrow {
+  position: absolute;
+  top: 17%;
+  width: min(31vw, 430px);
+  min-width: 220px;
+  fill: none;
+  stroke: rgba(23, 23, 23, 0.42);
+  stroke-width: 13;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  filter: blur(0.15px);
+  pointer-events: none;
+}
+
+.fallback-arrow-left {
+  left: clamp(0.5rem, 5vw, 5rem);
+}
+
+.fallback-arrow-right {
+  right: clamp(0.5rem, 5vw, 5rem);
+}
+
+.fallback-home,
+.fallback-corridor {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(16px);
+  transition:
+    opacity 260ms ease,
+    transform 360ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.fallback-home.is-active,
+.fallback-corridor.is-active {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(0);
+}
+
+.fallback-sign {
+  position: absolute;
+  top: clamp(1.2rem, 4vh, 2.6rem);
+  left: 50%;
+  display: grid;
+  gap: 0.05rem;
+  width: min(520px, calc(100vw - 2rem));
+  padding: 0.9rem 1.2rem 1.05rem;
+  text-align: center;
+  background:
+    url("/textures/paper-texture.webp") center / cover,
+    var(--fb-paper);
+  clip-path: polygon(0 4%, 100% 0, 97% 96%, 4% 100%);
+  box-shadow: 0 16px 42px var(--fb-shadow);
+  transform: translateX(-50%) rotate(-1deg);
+}
+
+.fallback-sign span {
+  font-family: "Cabin Sketch", cursive;
+  font-size: 0.92rem;
+  font-weight: 700;
+  letter-spacing: 0;
+}
+
+.fallback-sign strong {
+  font-family: "Rubik Scribble", "Cabin Sketch", cursive;
+  font-size: 3.7rem;
+  line-height: 0.95;
+  letter-spacing: 0;
+  white-space: nowrap;
+}
+
+.fallback-main-door {
+  position: relative;
+  width: min(290px, 52vw);
+  aspect-ratio: 0.69;
+  margin-top: clamp(2.4rem, 8vh, 5rem);
+  padding: 0;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+  filter: drop-shadow(0 26px 36px rgba(0, 0, 0, 0.2));
+  transform: perspective(900px) rotateX(var(--tilt-y, 0deg)) rotateY(var(--tilt-x, 0deg));
+  transition:
+    transform 180ms ease,
+    filter 180ms ease;
+}
+
+.fallback-main-door:hover,
+.fallback-main-door.is-pressed {
+  filter:
+    drop-shadow(0 24px 36px rgba(0, 0, 0, 0.18))
+    drop-shadow(0 0 22px color-mix(in srgb, var(--fb-accent) 34%, transparent));
+}
+
+.fallback-main-door::before {
+  position: absolute;
+  inset: 19% 16% 12%;
+  content: "";
+  background: color-mix(in srgb, var(--fb-accent) 24%, transparent);
+  opacity: 0;
+  transition: opacity 180ms ease;
+}
+
+.fallback-main-door:hover::before,
+.fallback-main-door.is-pressed::before {
+  opacity: 1;
+}
+
+.fallback-main-door img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  pointer-events: none;
+}
+
+.fallback-main-door .door-frame {
+  z-index: 3;
+}
+
+.fallback-main-door .door-leaf {
+  z-index: 2;
+  transform-origin: center;
+  transition: transform 380ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.fallback-main-door:hover .door-leaf-left,
+.fallback-main-door.is-pressed .door-leaf-left {
+  transform: translateX(-4%) rotateY(-12deg);
+}
+
+.fallback-main-door:hover .door-leaf-right,
+.fallback-main-door.is-pressed .door-leaf-right {
+  transform: translateX(4%) rotateY(12deg);
+}
+
+.fallback-main-door span {
+  position: absolute;
+  right: 12%;
+  bottom: 11%;
+  z-index: 4;
+  padding: 0.35rem 0.55rem;
+  color: var(--fb-ink);
+  background: rgba(255, 250, 240, 0.82);
+  border: 2px solid rgba(23, 23, 23, 0.72);
+  font-family: "Cabin Sketch", cursive;
+  font-size: 1rem;
+  font-weight: 700;
+  transform: rotate(-3deg);
+}
+
+.fallback-home-note,
+.fallback-scroll-tip {
+  position: absolute;
+  left: 50%;
+  bottom: calc(1.4rem + env(safe-area-inset-bottom));
+  width: min(520px, calc(100vw - 2rem));
+  margin: 0;
+  padding: 0.85rem 1rem;
+  text-align: center;
+  background:
+    url("/textures/paper-texture.webp") center / cover,
+    rgba(255, 250, 240, 0.92);
+  clip-path: polygon(0 2%, 100% 0, 97% 96%, 3% 100%);
+  box-shadow: 0 12px 34px rgba(0, 0, 0, 0.14);
+  transform: translateX(-50%);
+}
+
+.fallback-corridor {
+  perspective: 1100px;
+}
+
+.fallback-corridor::before {
+  position: absolute;
+  inset: 58% -10% -12%;
+  content: "";
+  background:
+    url("/textures/entrance/stone-path.webp") center / min(940px, 122vw) auto repeat-y,
+    linear-gradient(#ece1d2, #d7c5aa);
+  transform: rotateX(70deg);
+  transform-origin: top;
+  opacity: 0.86;
+}
+
+.fallback-corridor-track {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(150px, 1fr));
+  gap: clamp(1rem, 4vw, 3.2rem);
+  width: min(1120px, calc(100vw - 2rem));
+  transform: translateX(var(--corridor-x, 0px)) translateY(var(--corridor-y, 0px));
+  transition: transform 380ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.fallback-door-card {
+  position: relative;
+  display: grid;
+  align-content: end;
+  min-height: clamp(250px, 48vh, 430px);
+  padding: 1rem;
+  color: var(--fb-ink);
+  background:
+    linear-gradient(color-mix(in srgb, var(--door-color, var(--fb-accent)) 0%, transparent), color-mix(in srgb, var(--door-color, var(--fb-accent)) 0%, transparent)),
+    url("/textures/corridor/doors/drzwiabout.webp") center / contain no-repeat;
+  filter: drop-shadow(0 18px 28px rgba(0, 0, 0, 0.18));
+  cursor: pointer;
+  transition:
+    transform 180ms ease,
+    filter 180ms ease,
+    background 180ms ease;
+}
+
+.fallback-door-card:nth-child(1) {
+  --door-color: #5fab6a;
+  background-image:
+    linear-gradient(color-mix(in srgb, var(--door-color) 0%, transparent), color-mix(in srgb, var(--door-color) 0%, transparent)),
+    url("/textures/corridor/doors/drzwiprojekty.webp");
+}
+
+.fallback-door-card:nth-child(2) {
+  --door-color: #65bda9;
+  background-image:
+    linear-gradient(color-mix(in srgb, var(--door-color) 0%, transparent), color-mix(in srgb, var(--door-color) 0%, transparent)),
+    url("/textures/corridor/doors/drzwisocial.webp");
+}
+
+.fallback-door-card:nth-child(3) {
+  --door-color: #f0b35d;
+}
+
+.fallback-door-card:nth-child(4) {
+  --door-color: #ef7d91;
+  background-image:
+    linear-gradient(color-mix(in srgb, var(--door-color) 0%, transparent), color-mix(in srgb, var(--door-color) 0%, transparent)),
+    url("/textures/corridor/doors/drzwikontakt.webp");
+}
+
+.fallback-door-card::before {
+  position: absolute;
+  inset: 8% 12%;
+  content: "";
+  background: var(--door-color);
+  opacity: 0;
+  mix-blend-mode: multiply;
+  transition: opacity 180ms ease;
+}
+
+.fallback-door-card:hover,
+.fallback-door-card.is-active {
+  transform: translateY(-10px) scale(1.025);
+  filter:
+    drop-shadow(0 20px 30px rgba(0, 0, 0, 0.18))
+    drop-shadow(0 0 22px color-mix(in srgb, var(--door-color) 36%, transparent));
+}
+
+.fallback-door-card:hover::before,
+.fallback-door-card.is-active::before {
+  opacity: 0.22;
+}
+
+.fallback-door-card span,
+.fallback-door-card strong {
+  position: relative;
+  z-index: 2;
+  display: block;
+  width: fit-content;
+  background: rgba(255, 250, 240, 0.86);
+  border: 2px solid rgba(23, 23, 23, 0.66);
+  transform: rotate(-2deg);
+}
+
+.fallback-door-photo {
+  position: absolute;
+  top: 10%;
+  left: 50%;
+  z-index: 2;
+  width: min(68%, 150px);
+  aspect-ratio: 4 / 3;
+  padding: 0.22rem;
+  object-fit: cover;
+  background:
+    url("/textures/paper-texture.webp") center / cover,
+    var(--fb-paper);
+  border: 2px solid rgba(23, 23, 23, 0.56);
+  box-shadow: 5px 8px 0 rgba(23, 23, 23, 0.08);
+  transform: translateX(-50%) rotate(-3deg);
+  transition:
+    transform 180ms ease,
+    filter 180ms ease;
+}
+
+.fallback-door-card:nth-child(2) .fallback-door-photo,
+.fallback-door-card:nth-child(4) .fallback-door-photo {
+  object-fit: contain;
+  background:
+    url("/textures/paper-texture.webp") center / cover,
+    rgba(255, 250, 240, 0.88);
+}
+
+.fallback-door-card:hover .fallback-door-photo,
+.fallback-door-card.is-active .fallback-door-photo {
+  transform: translateX(-50%) translateY(-5px) rotate(2deg) scale(1.04);
+  filter: saturate(1.05) contrast(1.05);
+}
+
+.fallback-door-card span {
+  padding: 0.28rem 0.44rem;
+  font-size: 0.74rem;
+  font-weight: 900;
+  letter-spacing: 0;
+}
+
+.fallback-door-card strong {
+  margin-top: 0.32rem;
+  padding: 0.35rem 0.52rem;
+  font-family: "Cabin Sketch", cursive;
+  font-size: 1.8rem;
+  line-height: 1;
+}
+
+.fallback-back {
+  position: fixed;
+  top: 0.9rem;
+  left: 1rem;
+  padding: 0.72rem 0.9rem;
+  color: var(--fb-ink);
+  background:
+    url("/textures/paper-texture.webp") center / cover,
+    var(--fb-paper);
+  border: 0;
+  clip-path: polygon(0 3%, 100% 0, 96% 96%, 5% 100%);
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.12);
+  cursor: pointer;
+}
+
+.fallback-room {
+  position: fixed;
+  right: clamp(1rem, 4vw, 3rem);
+  bottom: clamp(1rem, 4vw, 3rem);
+  display: grid;
+  gap: 0.95rem;
+  width: min(520px, calc(100vw - 2rem));
+  max-height: min(720px, calc(100vh - 2rem));
+  padding: clamp(1rem, 2vw, 1.45rem);
+  overflow: auto;
+  overscroll-behavior: contain;
+  touch-action: pan-y;
+  -webkit-overflow-scrolling: touch;
+  color: var(--fb-ink);
+  background:
+    url("/textures/paper-texture.webp") center / cover,
+    var(--fb-paper);
+  clip-path: polygon(0 2%, 100% 0, 98% 98%, 3% 100%);
+  box-shadow: 0 18px 54px rgba(0, 0, 0, 0.18);
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(22px) rotate(-0.4deg);
+  transition:
+    opacity 220ms ease,
+    transform 320ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.fallback-room.is-open {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(0) rotate(-0.4deg) translate(var(--room-x, 0), var(--room-y, 0));
+}
+
+.fallback-room-top {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: clamp(0.9rem, 2vw, 1.2rem);
+  align-items: stretch;
+}
+
+.fallback-room-copy {
+  display: grid;
+  align-content: center;
+  gap: 0.65rem;
+  min-width: 0;
+  min-height: 100%;
+  padding: clamp(0.8rem, 2vw, 1.1rem);
+  background: rgba(255, 255, 255, 0.42);
+  border: 2px solid rgba(23, 23, 23, 0.12);
+}
+
+.fallback-room-copy span {
+  width: fit-content;
+  padding: 0.28rem 0.5rem;
+  color: var(--fb-paper);
+  background: var(--fb-ink);
+  font-size: 0.72rem;
+  font-weight: 900;
+  letter-spacing: 0;
+}
+
+.fallback-room h2,
+.fallback-room-copy h2 {
+  margin: 0;
+  font-family: "Rubik Scribble", "Cabin Sketch", cursive;
+  font-size: clamp(2rem, 7vw, 3.4rem);
+  line-height: 0.95;
+}
+
+.fallback-room p,
+.fallback-room-copy p {
+  margin: 0;
+  color: #363636;
+  font-size: 0.95rem;
+  line-height: 1.65;
+  overflow-wrap: anywhere;
+}
+
+.fallback-room-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0.72rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.fallback-room-hero {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  margin: 0;
+  overflow: hidden;
+  background:
+    url("/textures/paper-texture.webp") center / cover,
+    rgba(255, 255, 255, 0.5);
+  border: 2px solid rgba(23, 23, 23, 0.18);
+  box-shadow: 6px 8px 0 rgba(23, 23, 23, 0.08);
+}
+
+.fallback-room-hero img,
+.fallback-room-card img {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.fallback-room-hero-projects img,
+.fallback-room-hero-about img {
+  object-fit: cover;
+}
+
+.fallback-room-hero-studio img,
+.fallback-room-hero-contact img {
+  padding: 0.8rem;
+  object-fit: contain;
+}
+
+.fallback-room-card {
+  display: grid;
+  grid-template-columns: 96px minmax(0, 1fr);
+  gap: 0.7rem;
+  align-items: center;
+  min-height: 116px;
+  padding: 0.62rem;
+  background: rgba(255, 255, 255, 0.48);
+  border: 2px solid rgba(23, 23, 23, 0.12);
+}
+
+.fallback-room-card > div {
+  min-width: 0;
+}
+
+.fallback-room-card figure {
+  width: 96px;
+  aspect-ratio: 1;
+  margin: 0;
+  overflow: hidden;
+  background:
+    url("/textures/paper-texture.webp") center / cover,
+    rgba(255, 250, 240, 0.78);
+  border: 2px solid rgba(23, 23, 23, 0.18);
+}
+
+.fallback-room-card.is-photo figure {
+  aspect-ratio: 16 / 10;
+}
+
+.fallback-room-card.is-photo img {
+  object-fit: cover;
+}
+
+.fallback-room-card.is-icon img,
+.fallback-room-card.is-object img {
+  padding: 0.46rem;
+  object-fit: contain;
+}
+
+.fallback-room-card strong,
+.fallback-room-card span {
+  display: block;
+}
+
+.fallback-room-card strong {
+  font-family: "Cabin Sketch", cursive;
+  font-size: 1.18rem;
+  line-height: 1.05;
+}
+
+.fallback-room-card span {
+  margin-top: 0.18rem;
+  color: #3b3b3b;
+  font-size: 0.86rem;
+  line-height: 1.35;
+  overflow-wrap: anywhere;
+}
+
+.fallback-room button {
+  justify-self: start;
+  padding: 0.65rem 0.85rem;
+  color: var(--fb-paper);
+  background: var(--fb-ink);
+  border: 0;
+  cursor: pointer;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --fb-ink: #f4f0e5;
+    --fb-paper: #171717;
+    --fb-wall: #101211;
+    --fb-accent: #5fab6a;
+    --fb-shadow: rgba(0, 0, 0, 0.42);
+  }
+
+  .fallback-site {
+    background:
+      radial-gradient(circle at 50% 18%, rgba(95, 171, 106, 0.15), transparent 34%),
+      #101211;
+  }
+
+  .fallback-wall,
+  .fallback-main-door img,
+  .fallback-door-card {
+    filter: contrast(0.94) brightness(0.86) drop-shadow(0 20px 32px rgba(0, 0, 0, 0.38));
+  }
+
+  .fallback-room p,
+  .fallback-room-copy p,
+  .fallback-room-card span {
+    color: #d7d0c3;
+  }
+
+  .fallback-door-photo,
+  .fallback-room-hero,
+  .fallback-room-card figure {
+    border-color: rgba(244, 240, 229, 0.22);
+  }
+
+  .fallback-room-card {
+    background: rgba(255, 255, 255, 0.07);
+    border-color: rgba(244, 240, 229, 0.14);
+  }
+
+  .fallback-room-copy {
+    background: rgba(255, 255, 255, 0.07);
+    border-color: rgba(244, 240, 229, 0.14);
+  }
+}
+
+@media (max-width: 760px) {
+  .fallback-arrow {
+    top: 18%;
+    width: 42vw;
+    min-width: 160px;
+    stroke-width: 10;
+  }
+
+  .fallback-main-door {
+    width: min(250px, 68vw);
+  }
+
+  .fallback-sign strong {
+    font-size: clamp(2.4rem, 16vw, 3.4rem);
+  }
+
+  .fallback-corridor-track {
+    grid-template-columns: 1fr;
+    width: min(260px, 76vw);
+    gap: 1.2rem;
+  }
+
+  .fallback-door-card {
+    min-height: 220px;
+  }
+
+  .fallback-room {
+    right: 0.6rem;
+    bottom: 0.6rem;
+    width: calc(100vw - 1.2rem);
+    max-height: 72vh;
+  }
+
+  .fallback-room-top {
+    grid-template-columns: 1fr;
+  }
+
+  .fallback-room-hero {
+    max-height: 34vh;
+  }
+
+  .fallback-room-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .fallback-room-card {
+    grid-template-columns: 72px minmax(0, 1fr);
+    min-height: 92px;
+  }
+
+  .fallback-room-card figure {
+    width: 72px;
+  }
+}
