@@ -5106,12 +5106,42 @@ body.is-scrolled .top-nav {
   margin-top: 0;
 }
 
+.faq-section .social-section-heading {
+  grid-row: 1;
+  align-self: start;
+  justify-self: center;
+  display: grid;
+  justify-items: center;
+  gap: 10px;
+  position: relative;
+  z-index: 3;
+}
+
+.faq-section .social-section-heading .social-hint {
+  margin-top: 0;
+}
+
 .faq-section .final-copy {
   grid-row: 2;
   align-self: center;
   position: relative;
   top: clamp(24px, 2.8vh, 32px);
   margin-top: 0;
+  isolation: isolate;
+}
+
+.faq-section .final-copy::before {
+  position: absolute;
+  inset: -18% -10%;
+  z-index: -1;
+  border-radius: 50%;
+  background:
+    radial-gradient(ellipse 68% 56% at 50% 44%, rgba(249, 236, 229, 0.16), transparent 72%),
+    radial-gradient(ellipse 86% 66% at 50% 52%, rgba(169, 222, 212, 0.1), transparent 76%);
+  content: "";
+  filter: blur(30px);
+  opacity: 0.88;
+  pointer-events: none;
 }
 
 .faq-section .final-copy h2 {
@@ -5455,5 +5485,144 @@ body.is-scrolled .top-nav {
   .faq-section .social-section-label {
     position: relative;
     z-index: 3;
+  }
+}
+
+/* Multi-track orbit: platforms move on three quiet paths with independent
+ * scale and timing, adding depth without turning the contact area into a
+ * noisy animation. */
+.faq-section .social-strip {
+  --social-radius-outer: clamp(250px, 24vw, 340px);
+  --social-radius-middle: clamp(184px, 18vw, 252px);
+  --social-radius-inner: clamp(124px, 12vw, 164px);
+  width: min(840px, calc(100vw - 48px));
+}
+
+.faq-section .social-strip::before {
+  display: none;
+}
+
+.faq-section .social-track {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  display: block;
+  width: calc(var(--social-track-radius) + var(--social-track-radius));
+  height: calc(var(--social-track-radius) + var(--social-track-radius));
+  border: 1px solid rgba(255, 255, 255, 0.105);
+  border-radius: 50%;
+  background: transparent !important;
+  color: transparent;
+  opacity: 0.9;
+  pointer-events: none;
+  transform: translate(-50%, -50%);
+}
+
+.faq-section .social-track-outer {
+  --social-track-radius: var(--social-radius-outer);
+  border-color: rgba(255, 255, 255, 0.14);
+  box-shadow: 0 0 56px rgba(169, 222, 212, 0.06);
+}
+
+.faq-section .social-track-middle {
+  --social-track-radius: var(--social-radius-middle);
+  border-style: dashed;
+  border-color: rgba(169, 222, 212, 0.16);
+}
+
+.faq-section .social-track-inner {
+  --social-track-radius: var(--social-radius-inner);
+  border-color: rgba(255, 247, 242, 0.11);
+}
+
+.faq-section .social-orbit {
+  z-index: 1;
+  animation: none;
+}
+
+.faq-section .social-strip a {
+  z-index: 2;
+  width: var(--social-icon-size);
+  height: var(--social-icon-size);
+  animation: social-item-orbit var(--social-duration) linear infinite;
+  animation-direction: var(--social-direction, normal);
+  will-change: transform;
+}
+
+.faq-section .social-orbit-card {
+  display: grid;
+  place-items: center;
+  width: 100% !important;
+  height: 100% !important;
+  min-height: 0;
+  background: transparent !important;
+  box-shadow: none;
+  transform: rotate(calc(-1 * var(--social-angle)));
+  animation: social-card-counter-spin var(--social-duration) linear infinite;
+  animation-direction: var(--social-direction, normal);
+  will-change: transform;
+}
+
+.faq-section .social-orbit-card > span {
+  width: 100%;
+  height: var(--social-icon-size) !important;
+  border-radius: 50%;
+  box-shadow: none;
+}
+
+.faq-section .social-orbit-card > span svg {
+  width: 52%;
+  height: 52%;
+}
+
+.faq-section .social-hint {
+  display: block;
+  margin-top: 14px;
+  color: rgba(255, 247, 242, 0.62);
+  font-size: 13px;
+  letter-spacing: 0.04em;
+}
+
+@keyframes social-item-orbit {
+  from {
+    transform: translate(-50%, -50%) rotate(var(--social-angle)) translateY(calc(-1 * var(--social-radius)));
+  }
+
+  to {
+    transform: translate(-50%, -50%) rotate(calc(var(--social-angle) + 360deg)) translateY(calc(-1 * var(--social-radius)));
+  }
+}
+
+@media (max-width: 680px) {
+  .faq-section .social-strip {
+    --social-radius-outer: clamp(116px, 38vw, 150px);
+    --social-radius-middle: clamp(84px, 28vw, 110px);
+    --social-radius-inner: clamp(54px, 18vw, 70px);
+    width: min(100%, 360px);
+  }
+
+  .faq-section .social-strip a {
+    width: var(--social-icon-size-mobile);
+    height: var(--social-icon-size-mobile);
+  }
+
+  .faq-section .social-orbit-card {
+    width: 100%;
+    height: 100%;
+  }
+
+  .faq-section .social-orbit-card > span {
+    height: var(--social-icon-size-mobile) !important;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .faq-section .social-strip a,
+  .faq-section .social-orbit-card {
+    animation: none !important;
+  }
+
+  .faq-section .social-orbit-card {
+    transform: rotate(calc(-1 * var(--social-angle)));
   }
 }

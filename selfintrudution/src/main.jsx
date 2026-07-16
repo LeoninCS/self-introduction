@@ -70,8 +70,8 @@ const internshipCards = [
     eyebrow: 'AI Infra 实习 · Solar',
     company: 'MiniMax · AI Infra 系统组',
     period: '2026.07.13 — 至今',
-    title: '参与 Solar 机器资源管理与调配平台建设，为 Volcano 工作负载提供资源保障。',
-    text: 'Solar 面向 Volcano 调度体系统一管理集群、机器池、业务、队列与资源容量，通过队列配置和动态调整为训练、推理等工作负载提供机器资源保障；具体 Job / Pod 放置调度由 Volcano Scheduler 完成。',
+    title: '参与 Solar 资源分配平台建设，承接 Volcano 侧业务资源请求。',
+    text: 'Kubernetes 负责将机器池化为可调度资源；Volcano 侧业务向 Solar 提交需求，Solar 统一管理资源容量并将合适的资源分配给对应业务。',
     focus: '围绕 Solar 的集群机器调整与备机保障机制，提升资源变更链路的并发效率、触发灵活性与调度稳定性。',
     deliverables: [
       {
@@ -90,8 +90,8 @@ const internshipCards = [
         text: '完善 Solar 选机链路的 topology required / preferred 语义：支持约束指定 group、优先选择拓扑邻近节点，并在资源不足时回退基础策略。',
       },
     ],
-    visualTitle: 'Solar · Resource Control Plane',
-    visualText: 'Cluster / Queue / Capacity / Volcano Scheduler',
+    visualTitle: 'Solar · Resource Allocation Platform',
+    visualText: 'Kubernetes Resource Pool / Solar Allocation / Business Workload',
     brandLogo: 'https://filecdn.minimax.chat/public/969d635c-cab6-45cc-8d61-47c9fe40c81f.png',
     variant: 'minimax',
   },
@@ -211,30 +211,35 @@ const socials = [
     href: 'https://github.com/LeoninCS',
     Icon: FaGithub,
     tone: 'github',
+    orbit: { angle: 12, track: 'outer', duration: '36s', direction: 'normal', size: '66px', mobileSize: '46px' },
   },
   {
     name: 'X',
     href: 'https://x.com/xxxmvp2',
     Icon: FaXTwitter,
     tone: 'x',
+    orbit: { angle: 272, track: 'middle', duration: '27s', direction: 'reverse', size: '50px', mobileSize: '38px' },
   },
   {
     name: 'Bilibili',
     href: 'https://space.bilibili.com/491359383',
     Icon: FaBilibili,
     tone: 'bilibili',
+    orbit: { angle: 92, track: 'middle', duration: '23s', direction: 'reverse', size: '62px', mobileSize: '44px' },
   },
   {
     name: 'Instagram',
     href: 'https://www.instagram.com/forever_mvp0?igsh=MXhnNjA3ZjFkbTZwbg==',
     Icon: FaInstagram,
     tone: 'instagram',
+    orbit: { angle: 192, track: 'outer', duration: '42s', direction: 'normal', size: '58px', mobileSize: '42px' },
   },
   {
     name: '小红书',
     href: 'https://xhslink.com/m/68F5FSoWMxt',
     Icon: SiXiaohongshu,
     tone: 'xiaohongshu',
+    orbit: { angle: 220, track: 'inner', duration: '18s', direction: 'normal', size: '56px', mobileSize: '40px' },
   },
 ];
 
@@ -1124,7 +1129,7 @@ function Projects() {
 }
 
 function MiniMaxInfraVisual({ card }) {
-  const flow = ['Workload Request', 'Solar', 'Volcano Scheduler'];
+  const flow = ['Volcano 业务请求', 'Solar 分配平台', '业务获得 K8s 资源'];
 
   return (
     <div className="get-visual minimax-visual">
@@ -1143,7 +1148,7 @@ function MiniMaxInfraVisual({ card }) {
           <i><b />ONLINE</i>
         </div>
 
-        <div className="minimax-flow" aria-label="Solar 与 Volcano Scheduler 资源链路">
+        <div className="minimax-flow" aria-label="Volcano 业务请求经 Solar 分配 Kubernetes 池化资源">
           {flow.map((item, index) => (
             <React.Fragment key={item}>
               <span>
@@ -1342,7 +1347,10 @@ function Socials() {
       <div className="section-inner">
         <h2 id="socials-title" className="section-visually-hidden">社媒与联系</h2>
 
-        <span className="social-section-label pill muted">社媒</span>
+        <div className="social-section-heading">
+          <span className="social-section-label pill muted">社媒</span>
+          <span className="social-hint">点击图标访问社媒</span>
+        </div>
 
         <div className="final-copy">
           <h2>沟通与协作，从这里开始。</h2>
@@ -1354,21 +1362,31 @@ function Socials() {
 
         <div className="social-directory">
           <div className="social-strip" aria-label="社媒账号">
+            <span className="social-track social-track-outer" aria-hidden="true" />
+            <span className="social-track social-track-middle" aria-hidden="true" />
+            <span className="social-track social-track-inner" aria-hidden="true" />
             <div className="social-orbit">
-              {socials.map((item, index) => (
+              {socials.map((item) => (
                 <a
+                  aria-label={item.name}
                   className={`social-${item.tone}`}
                   href={item.href}
                   key={item.name}
                   rel="noreferrer"
-                  style={{ '--social-angle': `${index * 72}deg` }}
+                  style={{
+                    '--social-angle': `${item.orbit.angle}deg`,
+                    '--social-radius': `var(--social-radius-${item.orbit.track})`,
+                    '--social-duration': item.orbit.duration,
+                    '--social-direction': item.orbit.direction,
+                    '--social-icon-size': item.orbit.size,
+                    '--social-icon-size-mobile': item.orbit.mobileSize,
+                  }}
                   target="_blank"
                 >
                   <span className="social-orbit-card">
                     <span aria-hidden="true">
                       <item.Icon />
                     </span>
-                    <strong>{item.name}</strong>
                   </span>
                 </a>
               ))}
