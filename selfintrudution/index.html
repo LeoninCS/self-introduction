@@ -17,7 +17,7 @@
     content="欢迎来到布洛克琴的主页，这里记录了我的个人信息与项目经历，希望能帮助您更好地了解我。" />
   <meta name="author" content="LeoninCS, Xianchao Qian, 献超前" />
   <meta name="keywords"
-    content="LeoninCS, 献超前, Xianchao Qian, MiniMax, AI Infra, Volcano Job, 训练资源编排, GPU 调度, Go, Gin, GORM, Kubernetes, Sealos, CompliK, GCFeed, AI Agent, SDD, LangGraph, Redis, MQ, Raft, Codeforces, LeetCode, CCPC, GPLT, 蓝桥杯, 百度之星, ICPC, 个人简历" />
+    content="LeoninCS, 献超前, Xianchao Qian, MiniMax, AI Infra, Solar, Volcano Job, Volcano Scheduler, 训练资源编排, 机器资源管理, 资源调配, GPU 基础设施, Go, Gin, GORM, Kubernetes, Sealos, CompliK, GCFeed, SDD, Redis, MQ, Raft, Codeforces, LeetCode, CCPC, GPLT, 蓝桥杯, 百度之星, ICPC, 个人简历" />
   <meta name="robots" content="index, follow" />
 
   <meta property="og:type" content="website" />
@@ -77,7 +77,9 @@
           "后端工程",
           "Kubernetes",
           "MiniMax AI Infra",
+          "Solar 机器资源管理与调配平台",
           "Volcano Job",
+          "Volcano Scheduler",
           "训练资源编排",
           "GPU 资源调度",
           "Sealos",
@@ -87,10 +89,10 @@
           "MQ",
           "Raft",
           "分布式系统",
-          "AI Agent",
+          "AI Infrastructure",
           "SDD",
           "LangGraph",
-          "Agent Workflow",
+          "资源管理平台",
           "算法训练",
           "摄影"
         ],
@@ -209,21 +211,7 @@
       border-radius: inherit;
       background: linear-gradient(90deg, #f2d7bd, #b8e8dd);
       transform-origin: left center;
-      animation: boot-loader-progress 1.6s ease-in-out infinite;
-    }
-
-    @keyframes boot-loader-progress {
-      0% {
-        transform: scaleX(0.18);
-      }
-
-      55% {
-        transform: scaleX(0.72);
-      }
-
-      100% {
-        transform: scaleX(0.94);
-      }
+      transform: scaleX(0);
     }
   </style>
 </head>
@@ -260,7 +248,7 @@
       <article id="seo-info">
         <h2>信息</h2>
         <p>我是献超前，技术 ID 为 LeoninCS，河南大学软件工程专业本科在读，预计于 2027 年毕业。目前在上海 MiniMax AI Infra 系统组实习，持续参与实际工程项目与开源相关工作。</p>
-        <p>AI重度患者，日均上亿token用量；DevOps理念践行者，具备Go后端、AI Agent开发能力、Docker、Kubernetes等云原生技术部署运维能力，并具备实际项目落地经验；</p>
+        <p>AI 重度用户，日均上亿 Token；DevOps 理念践行者，主要关注 AI Infra、Go 后端、Docker、Kubernetes 等云原生基础设施，并具备实际项目落地经验；</p>
         <p>开源贡献者，维护 Sealos 合规组件，个人项目 GitHub 累计 500+ Stars；技术内容创作者，全网累计 2000+ 粉丝，1.5w+ 点赞收藏数；Web3 信徒，认同去中心化的理念。</p>
         <p>生活中，我喜欢 骑行、摄影与 Hi-Fi，也常听 Hip Hop 和 R&amp;B。除此之外，我对投资理财也有一定兴趣，主要关注美股与加密货币，保持对技术与生活的长期探索。</p>
         <ul>
@@ -275,7 +263,7 @@
 
       <article id="seo-internship">
         <h2>实习</h2>
-        <p>2026 年 7 月至今在 MiniMax AI Infra 系统组实习，参与面向 Volcano Job 的 AI 训练资源编排平台建设，负责集群机器调整、拓扑感知调度与备机保障能力。</p>
+        <p>2026 年 7 月至今在 MiniMax AI Infra 系统组实习，参与 Solar 机器资源管理与调配平台建设。Solar 面向 Volcano 调度体系统一管理集群、机器池、业务、队列和资源容量，通过队列配置与动态调整为训练、推理等工作负载提供资源保障；具体 Job / Pod 放置调度由 Volcano Scheduler 完成。</p>
         <p>2026 年 3 月至 7 月在环界云计算 / Sealos 系统组实习，负责 Sealos 集群合规组件建设，包括 Admin、Path 子路径合规分析、CI/CD、多端分析插件、ProcScan 和系统维护。</p>
       </article>
 

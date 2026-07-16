@@ -31,7 +31,7 @@
   --hero-ui-opacity: 1;
   --hero-light-x: 0px;
   --hero-light-y: 0px;
-  --framer-spring: 1000ms cubic-bezier(0.16, 1, 0.3, 1);
+  --framer-spring: 720ms cubic-bezier(0.16, 1, 0.3, 1);
   --final-glow-y: 0px;
   --page-bg: #000;
   --page-bg-deep: #000;
@@ -77,9 +77,9 @@ body.is-resource-loading {
 
 .site-shell {
   opacity: 0;
-  transform: translateY(10px);
+  transform: translateY(4px);
   transition:
-    opacity 520ms cubic-bezier(0.16, 1, 0.3, 1),
+    opacity 480ms cubic-bezier(0.16, 1, 0.3, 1),
     transform 520ms cubic-bezier(0.16, 1, 0.3, 1);
 }
 
@@ -99,8 +99,8 @@ body.is-resource-loading {
     radial-gradient(ellipse at 50% 22%, rgba(161, 129, 133, 0.64), transparent 48%),
     linear-gradient(180deg, #1b2228 0%, #10120f 58%, #020302 100%);
   transition:
-    opacity 420ms ease,
-    visibility 420ms ease;
+    opacity 260ms ease,
+    visibility 260ms ease;
 }
 
 .startup-loader::before {
@@ -126,6 +126,14 @@ body.is-resource-loading {
   justify-items: center;
   gap: 18px;
   width: min(340px, calc(100% - 64px));
+  transition:
+    opacity 180ms ease,
+    transform 240ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.startup-loader.is-done .startup-loader-inner {
+  opacity: 0;
+  transform: translateY(-4px);
 }
 
 .startup-loader-inner span {
@@ -177,8 +185,9 @@ button {
 .top-nav {
   position: fixed;
   top: 0;
-  left: 50%;
-  z-index: 30;
+  right: 0;
+  left: 0;
+  z-index: 100;
   display: grid;
   grid-template-columns: 1fr auto 1fr;
   align-items: center;
@@ -187,7 +196,6 @@ button {
   padding: 0 40px;
   border: 1px solid transparent;
   border-radius: 0;
-  transform: translateX(-50%);
   transition:
     background 240ms ease,
     border-color 240ms ease,
@@ -535,9 +543,9 @@ body.is-scrolled .top-nav {
   z-index: 0;
   width: calc(100% - 220px);
   height: 100%;
-  opacity: 0.82;
-  filter: saturate(1.08) contrast(1.02);
-  animation: mock-color-shift 9s ease-in-out infinite alternate;
+  opacity: 0.72;
+  filter: saturate(0.94) contrast(1.02) brightness(0.98);
+  animation: none;
   transform: translateZ(0) scale(1.02);
 }
 
@@ -571,10 +579,10 @@ body.is-scrolled .top-nav {
     radial-gradient(ellipse at 72% 10%, rgba(255, 255, 255, 0.22), transparent 38%);
   background-size: 210% 100%, auto, auto, auto, auto;
   background-position: -88% 0, center, center, center, center;
-  opacity: 0.5;
+  opacity: 0.18;
   mix-blend-mode: screen;
   transform: translate3d(-18%, 0, 0);
-  animation: light-sweep-transform 7.2s cubic-bezier(0.16, 1, 0.3, 1) infinite;
+  animation: light-sweep-transform 12.8s cubic-bezier(0.16, 1, 0.3, 1) infinite;
   will-change: transform;
 }
 
@@ -1761,7 +1769,7 @@ body.is-scrolled .top-nav {
   margin-top: 28px;
 }
 
-.reveal:not(.hero-device),
+.reveal:not(.hero-device):not(.hero-copy),
 .pill {
   animation: fade-up var(--framer-spring) both;
 }
@@ -4129,8 +4137,9 @@ body.is-scrolled .top-nav {
 }
 
 .mock-color-field {
-  opacity: 0.92;
-  filter: saturate(1.42) contrast(1.04) brightness(1.04);
+  opacity: 0.76;
+  filter: saturate(0.96) contrast(1.02) brightness(0.99);
+  animation: none;
 }
 
 .product-mockup::before {
@@ -4138,7 +4147,7 @@ body.is-scrolled .top-nav {
     radial-gradient(ellipse at calc(66% + var(--hero-light-x)) calc(18% + var(--hero-light-y)), rgba(255, 255, 255, 0.42), transparent 36%),
     radial-gradient(ellipse at 74% 64%, rgba(42, 196, 199, 0.26), transparent 42%),
     linear-gradient(118deg, rgba(255, 255, 255, 0.14), transparent 20% 58%, rgba(255, 255, 255, 0.1));
-  opacity: 0.34;
+  opacity: 0.24;
 }
 
 .product-mockup::after {
@@ -4154,7 +4163,8 @@ body.is-scrolled .top-nav {
       rgba(0, 0, 0, 0.42) 100%
     ),
     linear-gradient(90deg, rgba(255, 255, 255, 0.08), transparent 14% 84%, rgba(255, 255, 255, 0.06));
-  opacity: 0.36;
+  opacity: 0.2;
+  animation: light-sweep-transform 12.8s cubic-bezier(0.16, 1, 0.3, 1) infinite;
 }
 
 .mock-panel {
@@ -4967,4 +4977,483 @@ body.is-scrolled .top-nav {
   background:
     radial-gradient(ellipse at 50% 16%, rgba(255, 255, 255, 0.12), transparent 36%),
     linear-gradient(180deg, rgba(6, 8, 10, 0.04) 18%, rgba(4, 6, 8, 0.54) 100%);
+}
+
+/* Keep the section anchors attached to the fixed header at compact widths. */
+@media (max-width: 1040px) {
+  section[id] {
+    scroll-margin-top: 118px;
+  }
+
+  .top-nav {
+    overflow: visible;
+  }
+
+  .nav-center {
+    position: absolute;
+    top: calc(100% + 6px);
+    left: 50%;
+    display: flex;
+    width: min(720px, calc(100vw - 48px));
+    min-height: 42px;
+    padding: 5px;
+    gap: 3px;
+    border: 1px solid rgba(255, 255, 255, 0.09);
+    border-radius: 12px;
+    background: rgba(8, 12, 13, 0.86);
+    box-shadow: 0 12px 34px rgba(0, 0, 0, 0.22);
+    backdrop-filter: blur(16px) saturate(1.08);
+    transform: translateX(-50%);
+  }
+
+  .nav-center a {
+    display: inline-flex;
+    min-width: 0;
+    min-height: 32px;
+    padding: 6px 8px;
+    flex: 1 1 0;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px;
+    color: rgba(255, 255, 255, 0.78);
+    font-size: 12px;
+    line-height: 1;
+    white-space: nowrap;
+  }
+
+  .nav-center a:hover,
+  .nav-center a:focus-visible {
+    color: #fff3f0;
+    background: rgba(255, 255, 255, 0.08);
+    opacity: 1;
+  }
+
+  .nav-center a::after {
+    display: none;
+  }
+}
+
+@media (max-width: 560px) {
+  .nav-center {
+    width: calc(100vw - 16px);
+  }
+
+  .nav-center a {
+    padding-inline: 5px;
+    font-size: 11px;
+  }
+}
+
+/* Contact comes first; social links close the page as the final directory. */
+.faq-section .final-copy {
+  grid-row: 2;
+  margin-top: clamp(58px, 7.4vh, 84px);
+}
+
+.faq-section .social-strip {
+  grid-row: 3;
+  margin-top: clamp(54px, 7.4vh, 84px);
+  padding-bottom: clamp(44px, 6vh, 76px);
+}
+
+@media (max-width: 560px) {
+  .faq-section .final-copy {
+    margin-top: 48px;
+  }
+
+  .faq-section .social-strip {
+    margin-top: 42px;
+    padding-bottom: 48px;
+  }
+}
+
+/* Social directory: remove the extra display heading and let the contact
+ * block lead directly into a compact, square link grid. */
+.section-visually-hidden {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  padding: 0 !important;
+  margin: -1px !important;
+  overflow: hidden !important;
+  clip: rect(0, 0, 0, 0) !important;
+  white-space: nowrap !important;
+  border: 0 !important;
+}
+
+.faq-section::before {
+  background:
+    radial-gradient(ellipse 56% 54% at 50% 50%, var(--final-spotlight), transparent 70%),
+    radial-gradient(ellipse 76% 58% at 50% 60%, var(--final-spotlight-cool), transparent 78%),
+    linear-gradient(180deg, var(--page-bg) 0%, #020303 48%, #070b0b 72%, #101717 100%);
+}
+
+.faq-section::after {
+  background:
+    radial-gradient(ellipse 64% 58% at 50% 28%, rgba(255, 255, 255, 0.14), transparent 70%),
+    radial-gradient(ellipse 86% 72% at 50% 42%, rgba(255, 243, 240, 0.085), transparent 78%),
+    radial-gradient(ellipse 108% 68% at 50% 66%, rgba(127, 166, 166, 0.09), transparent 74%);
+}
+
+.faq-section .section-inner {
+  grid-template-rows: auto 1fr auto;
+}
+
+.faq-section .social-section-label {
+  grid-row: 1;
+  align-self: start;
+  justify-self: center;
+  margin-top: 0;
+}
+
+.faq-section .final-copy {
+  grid-row: 2;
+  align-self: center;
+  position: relative;
+  top: clamp(24px, 2.8vh, 32px);
+  margin-top: 0;
+}
+
+.faq-section .final-copy h2 {
+  max-width: 900px;
+  font-size: clamp(46px, 4.6vw, 70px);
+  line-height: 1.12;
+}
+
+.faq-section .social-directory {
+  grid-row: 3;
+  align-self: end;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  justify-items: center;
+  width: 100%;
+  margin-top: clamp(48px, 7vh, 84px);
+  margin-bottom: clamp(112px, 16vh, 184px);
+}
+
+.faq-section .social-strip {
+  align-items: start;
+  grid-template-columns: repeat(5, minmax(184px, 220px));
+  justify-self: center;
+  justify-content: space-between;
+  width: min(1320px, calc(100vw - 160px));
+  gap: 0;
+  margin: 0;
+  padding-bottom: 0;
+}
+
+.faq-section .social-strip a {
+  align-self: start;
+  aspect-ratio: 1 / 1;
+  min-height: 0;
+  height: auto;
+  padding: clamp(18px, 2.2vw, 32px);
+}
+
+/* Keep the directory restrained while letting each platform retain its own
+ * recognizable brand signal. */
+.faq-section .social-strip a.social-github span {
+  color: #24292f;
+  background: #f0f6fc;
+}
+
+.faq-section .social-strip a.social-x span {
+  color: #050505;
+  background: #ffffff;
+}
+
+.faq-section .social-strip a.social-bilibili span {
+  color: #ffffff;
+  background: #00aeec;
+}
+
+.faq-section .social-strip a.social-instagram span {
+  color: #ffffff;
+  background: linear-gradient(135deg, #7b2cff 0%, #e1306c 52%, #ffb347 100%);
+}
+
+.faq-section .social-strip a.social-xiaohongshu span {
+  color: #ffffff;
+  background: #ff2442;
+}
+
+@media (max-width: 1180px) {
+  .faq-section .social-strip {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    width: min(100%, 900px);
+    gap: 24px;
+  }
+}
+
+@media (max-width: 680px) {
+  .faq-section .social-strip {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 560px) {
+  .faq-section .final-copy {
+    top: 12px;
+    margin-top: 20px;
+  }
+
+  .faq-section .final-copy h2 {
+    font-size: clamp(40px, 10.8vw, 52px);
+  }
+
+  .faq-section .social-directory {
+    margin-top: 40px;
+    margin-bottom: 32px;
+  }
+
+  .faq-section .social-strip {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    width: 100%;
+    gap: 16px;
+    margin: 0;
+  }
+
+  .faq-section .social-strip a {
+    padding: 18px 12px;
+  }
+}
+
+/* Social orbit: the directory becomes one quiet, continuously moving ring. */
+.faq-section .social-strip {
+  --social-radius: clamp(118px, 22vw, 300px);
+  position: relative;
+  display: block;
+  width: min(760px, calc(100vw - 64px));
+  min-height: 0;
+  aspect-ratio: 1;
+  overflow: visible;
+  border-radius: 50%;
+}
+
+.faq-section .social-strip::before {
+  position: absolute;
+  inset: 8%;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 50%;
+  box-shadow:
+    0 0 0 1px rgba(169, 222, 212, 0.04),
+    0 0 64px rgba(169, 222, 212, 0.08);
+  content: "";
+  pointer-events: none;
+}
+
+.faq-section .social-strip::after {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 8px;
+  height: 8px;
+  border: 1px solid rgba(255, 247, 242, 0.58);
+  border-radius: 50%;
+  background: rgba(169, 222, 212, 0.72);
+  box-shadow: 0 0 24px rgba(169, 222, 212, 0.34);
+  content: "";
+  transform: translate(-50%, -50%);
+  display: none;
+}
+
+.faq-section .social-orbit {
+  position: absolute;
+  inset: 0;
+  animation: social-ring-spin 28s linear infinite;
+}
+
+.faq-section .social-strip a {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  display: block;
+  width: clamp(126px, 11vw, 172px);
+  min-height: 0;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  box-shadow: none;
+  transform: translate(-50%, -50%) rotate(var(--social-angle)) translateY(calc(-1 * var(--social-radius)));
+}
+
+.faq-section .social-strip a:hover,
+.faq-section .social-strip a:focus-visible {
+  border-color: transparent;
+  background: transparent;
+  transform: translate(-50%, -50%) rotate(var(--social-angle)) translateY(calc(-1 * var(--social-radius)));
+}
+
+.faq-section .social-orbit-card {
+  display: grid;
+  align-content: center;
+  justify-items: center;
+  gap: 14px;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 1;
+  padding: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 22px;
+  color: rgba(255, 247, 242, 0.92);
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.075), rgba(255, 255, 255, 0.018)),
+    rgba(12, 17, 18, 0.9);
+  box-shadow:
+    inset 0 1px rgba(255, 255, 255, 0.08),
+    0 18px 44px rgba(0, 0, 0, 0.28);
+  animation: social-card-counter-spin 28s linear infinite;
+}
+
+.faq-section .social-orbit-card > span {
+  display: grid;
+  place-items: center;
+  width: 52px;
+  height: 52px;
+  border-radius: 16px;
+  font-size: 24px;
+}
+
+.faq-section .social-orbit-card > span svg {
+  width: 25px;
+  height: 25px;
+}
+
+.faq-section .social-strip a.social-github .social-orbit-card,
+.faq-section .social-strip a.social-x .social-orbit-card,
+.faq-section .social-strip a.social-bilibili .social-orbit-card,
+.faq-section .social-strip a.social-instagram .social-orbit-card,
+.faq-section .social-strip a.social-xiaohongshu .social-orbit-card {
+  color: rgba(255, 247, 242, 0.92);
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.075), rgba(255, 255, 255, 0.018)),
+    rgba(12, 17, 18, 0.9);
+}
+
+.faq-section .social-strip a.social-github .social-orbit-card > span {
+  color: #24292f;
+  background: #f0f6fc;
+}
+
+.faq-section .social-strip a.social-x .social-orbit-card > span {
+  color: #050505;
+  background: #ffffff;
+}
+
+.faq-section .social-strip a.social-bilibili .social-orbit-card > span {
+  color: #ffffff;
+  background: #00aeec;
+}
+
+.faq-section .social-strip a.social-instagram .social-orbit-card > span {
+  color: #ffffff;
+  background: linear-gradient(135deg, #7b2cff 0%, #e1306c 52%, #ffb347 100%);
+}
+
+.faq-section .social-strip a.social-xiaohongshu .social-orbit-card > span {
+  color: #ffffff;
+  background: #ff2442;
+}
+
+@keyframes social-ring-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes social-card-counter-spin {
+  from {
+    transform: rotate(calc(-1 * var(--social-angle)));
+  }
+
+  to {
+    transform: rotate(calc(-1 * var(--social-angle) - 360deg));
+  }
+}
+
+@media (max-width: 680px) {
+  .faq-section .social-strip {
+    --social-radius: clamp(112px, 30vw, 132px);
+    width: min(100%, 342px);
+  }
+
+  .faq-section .social-strip a {
+    width: 116px;
+  }
+
+  .faq-section .social-orbit-card {
+    gap: 10px;
+    padding: 14px;
+    border-radius: 18px;
+  }
+
+  .faq-section .social-orbit-card > span {
+    width: 42px;
+    height: 42px;
+    border-radius: 13px;
+  }
+
+  .faq-section .social-orbit-card > span svg {
+    width: 21px;
+    height: 21px;
+  }
+
+  .faq-section .social-orbit-card strong {
+    font-size: 15px;
+  }
+}
+
+/* Orbit items stay light and upright so the circular track remains the
+ * visual focus instead of turning each link into a heavy rotating tile. */
+.faq-section .social-orbit-card,
+.faq-section .social-strip a.social-github .social-orbit-card,
+.faq-section .social-strip a.social-x .social-orbit-card,
+.faq-section .social-strip a.social-bilibili .social-orbit-card,
+.faq-section .social-strip a.social-instagram .social-orbit-card,
+.faq-section .social-strip a.social-xiaohongshu .social-orbit-card {
+  width: 100%;
+  height: auto;
+  aspect-ratio: auto;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent !important;
+  box-shadow: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .faq-section .social-orbit,
+  .faq-section .social-orbit-card {
+    animation: none !important;
+  }
+}
+
+/* On desktop the orbit belongs to the contact message itself. The text stays
+ * readable in the centre while the links travel around its perimeter. */
+@media (min-width: 681px) {
+  .faq-section .social-directory {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    grid-row: auto;
+    align-self: auto;
+    display: grid;
+    place-items: center;
+    margin: 0;
+    transform: translateY(clamp(-48px, -4vh, -24px));
+    pointer-events: none;
+  }
+
+  .faq-section .social-strip {
+    pointer-events: auto;
+  }
+
+  .faq-section .final-copy {
+    z-index: 2;
+  }
+
+  .faq-section .social-section-label {
+    position: relative;
+    z-index: 3;
+  }
 }

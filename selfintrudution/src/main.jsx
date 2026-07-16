@@ -28,7 +28,7 @@ const projects = [
     preview: ['Producer', 'Feed API', 'Redis Cache', 'MQ', 'MySQL'],
   },
   {
-    label: 'Agent',
+    label: 'Workflow',
     title: 'SDD Agent Harness',
     caption: '基于 SDD 的 Agent Harness，面向 VS Code、RAG、多 Agent 编排、自动门禁和文档回写闭环。',
     href: 'https://github.com/LeoninCS/SDD-Agent-Harness',
@@ -62,17 +62,17 @@ const profileRows = [
   ['学校', '河南大学 软件工程本科在读 · 开封'],
   ['当前工作地', '上海，中国'],
   ['求职方向', '开发工程师'],
-  ['技术方向', 'Go后端 · AI Agent · 云原生'],
+  ['技术方向', 'AI Infra · Go 后端 · 云原生'],
 ];
 
 const internshipCards = [
   {
-    eyebrow: 'AI Infra 实习',
+    eyebrow: 'AI Infra 实习 · Solar',
     company: 'MiniMax · AI Infra 系统组',
     period: '2026.07.13 — 至今',
-    title: '参与 AI 训练资源编排平台建设，面向 Volcano Job 提供机器资源调度能力。',
-    text: '以 Volcano Job 为训练任务载体，围绕作业资源诉求、节点匹配与集群容量状态完成机器资源编排，重点建设集群调整与备机保障链路。',
-    focus: '完善集群机器调整与备机保障机制，提升资源变更链路的并发效率、触发灵活性与调度稳定性。',
+    title: '参与 Solar 机器资源管理与调配平台建设，为 Volcano 工作负载提供资源保障。',
+    text: 'Solar 面向 Volcano 调度体系统一管理集群、机器池、业务、队列与资源容量，通过队列配置和动态调整为训练、推理等工作负载提供机器资源保障；具体 Job / Pod 放置调度由 Volcano Scheduler 完成。',
+    focus: '围绕 Solar 的集群机器调整与备机保障机制，提升资源变更链路的并发效率、触发灵活性与调度稳定性。',
     deliverables: [
       {
         title: '受控并行替换',
@@ -87,11 +87,11 @@ const internshipCards = [
       {
         title: '拓扑感知调度',
         date: '09.30',
-        text: '实现 topology required / preferred 选机语义：支持约束指定 group、优先选择拓扑邻近节点，并在资源不足时回退基础策略。',
+        text: '完善 Solar 选机链路的 topology required / preferred 语义：支持约束指定 group、优先选择拓扑邻近节点，并在资源不足时回退基础策略。',
       },
     ],
-    visualTitle: 'MiniMax AI Infra',
-    visualText: 'Work Order / Scheduler / Topology',
+    visualTitle: 'Solar · Resource Control Plane',
+    visualText: 'Cluster / Queue / Capacity / Volcano Scheduler',
     brandLogo: 'https://filecdn.minimax.chat/public/969d635c-cab6-45cc-8d61-47c9fe40c81f.png',
     variant: 'minimax',
   },
@@ -210,26 +210,31 @@ const socials = [
     name: 'GitHub',
     href: 'https://github.com/LeoninCS',
     Icon: FaGithub,
+    tone: 'github',
   },
   {
     name: 'X',
     href: 'https://x.com/xxxmvp2',
     Icon: FaXTwitter,
+    tone: 'x',
   },
   {
     name: 'Bilibili',
     href: 'https://space.bilibili.com/491359383',
     Icon: FaBilibili,
+    tone: 'bilibili',
   },
   {
     name: 'Instagram',
     href: 'https://www.instagram.com/forever_mvp0?igsh=MXhnNjA3ZjFkbTZwbg==',
     Icon: FaInstagram,
+    tone: 'instagram',
   },
   {
     name: '小红书',
     href: 'https://xhslink.com/m/68F5FSoWMxt',
     Icon: SiXiaohongshu,
+    tone: 'xiaohongshu',
   },
 ];
 
@@ -257,6 +262,13 @@ const deferredAssetUrls = Array.from(new Set([
   ...internshipCards.flatMap((card) => [card.image, card.brandLogo].filter(Boolean)),
   ...competitionCards.map((card) => card.image),
   ...hobbyCards.map((card) => card.image),
+]));
+
+// Every visual asset used by any section participates in the initial gate so
+// the progress indicator represents the complete page, not just the hero.
+const pageAssetUrls = Array.from(new Set([
+  ...entryAssetUrls,
+  ...deferredAssetUrls,
 ]));
 
 function clamp(value, min, max) {
@@ -293,35 +305,23 @@ function loadImageAsset(src) {
 }
 
 async function preloadPageResources(onProgress) {
-  const assets = entryAssetUrls;
+  const assets = pageAssetUrls;
   let completed = 0;
+  const totalTasks = assets.length + 1;
   const updateProgress = () => {
     completed += 1;
-    onProgress(Math.min(0.94, completed / Math.max(assets.length, 1)));
+    onProgress(Math.min(1, completed / totalTasks));
   };
   const imageLoads = assets.map((src) => loadImageAsset(src).finally(updateProgress));
-  const fontReady = document.fonts?.ready?.catch(() => undefined) ?? Promise.resolve();
+  const fontReady = (document.fonts?.ready ?? Promise.resolve())
+    .catch(() => undefined)
+    .finally(updateProgress);
 
   await Promise.all([
     ...imageLoads,
     fontReady,
   ]);
   onProgress(1);
-}
-
-function preloadDeferredResources() {
-  const start = () => {
-    deferredAssetUrls.forEach((src) => {
-      loadImageAsset(src);
-    });
-  };
-
-  if ('requestIdleCallback' in window) {
-    window.requestIdleCallback(start, { timeout: 1800 });
-    return;
-  }
-
-  window.setTimeout(start, 400);
 }
 
 function useResourceGate() {
@@ -337,19 +337,19 @@ function useResourceGate() {
         if (!cancelled) {
           setState((current) => ({
             ...current,
-            progress: Math.max(current.progress, progress),
+            progress,
           }));
         }
       });
 
-      const remainingDuration = 520 - (performance.now() - startedAt);
+      // Keep a short visual hand-off only after every page asset has finished.
+      const remainingDuration = Math.max(0, 280 - (performance.now() - startedAt));
       if (remainingDuration > 0) {
         await delay(remainingDuration);
       }
 
       if (!cancelled) {
         setState({ progress: 1, ready: true });
-        preloadDeferredResources();
       }
     };
 
@@ -593,11 +593,13 @@ function useScrollEffects() {
       const heroMotionProgress = clamp(scrollY / heroTravel, 0, 1);
       const gravityProgress = Math.pow(heroMotionProgress, 1.54);
       const settleProgress = 1 - Math.pow(1 - heroMotionProgress, 2.2);
-      const forestLiftTarget = viewportWidth <= 560 ? -68 : viewportWidth <= 980 ? -102 : -132;
-      const frontHillLiftTarget = viewportWidth <= 560 ? -38 : -58;
-      const backHillLiftTarget = viewportWidth <= 560 ? -12 : -22;
-      const copyLiftTarget = viewportWidth <= 560 ? -72 : viewportWidth <= 980 ? -86 : -104;
-      const deviceLiftTarget = viewportWidth <= 560 ? -18 : -32;
+      // Keep the depth cue visible, but avoid making the first viewport feel
+      // like it is being pulled away from the user while scrolling.
+      const forestLiftTarget = viewportWidth <= 560 ? -34 : viewportWidth <= 980 ? -54 : -76;
+      const frontHillLiftTarget = viewportWidth <= 560 ? -18 : -34;
+      const backHillLiftTarget = viewportWidth <= 560 ? -6 : -14;
+      const copyLiftTarget = viewportWidth <= 560 ? -38 : viewportWidth <= 980 ? -50 : -62;
+      const deviceLiftTarget = viewportWidth <= 560 ? -9 : -18;
       scrollVelocity =
         scrollVelocity * scrollTuning.inertia.velocityRetain +
         instantVelocity * scrollTuning.inertia.velocityInject;
@@ -616,7 +618,7 @@ function useScrollEffects() {
       setMotionTarget(
         'forestScale',
         1 +
-          settleProgress * 0.038 +
+          settleProgress * 0.018 +
           clamp(
             Math.abs(scrollVelocity) * scrollTuning.inertia.forestScaleVelocity,
             0,
@@ -625,10 +627,10 @@ function useScrollEffects() {
       );
       setMotionTarget('heroCopyY', settleProgress * copyLiftTarget + inertialPull * 0.16);
       setMotionTarget('heroDeviceY', gravityProgress * deviceLiftTarget + inertialPull * 0.18);
-      setMotionTarget('heroDeviceOpacity', 1 - Math.min(heroMotionProgress * 0.08, 0.08));
-      setMotionTarget('heroUIOpacity', 1 - Math.min(heroMotionProgress * 0.18, 0.18));
-      setMotionTarget('heroLightX', (heroMotionProgress - 0.5) * 22);
-      setMotionTarget('heroLightY', heroMotionProgress * -22);
+      setMotionTarget('heroDeviceOpacity', 1 - Math.min(heroMotionProgress * 0.04, 0.04));
+      setMotionTarget('heroUIOpacity', 1 - Math.min(heroMotionProgress * 0.1, 0.1));
+      setMotionTarget('heroLightX', (heroMotionProgress - 0.5) * 12);
+      setMotionTarget('heroLightY', heroMotionProgress * -12);
       setRootVar('--final-glow-y', `${Math.round(scrollY * -0.018)}px`);
       ensureMotion();
 
@@ -721,19 +723,18 @@ function MockColorField() {
     let width = 0;
     let height = 0;
     let animationFrame = 0;
+    let lastPaintTime = Number.NEGATIVE_INFINITY;
     const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
     const colorStops = [
-      { x: 0.64, y: 0.22, xAmp: 0.18, yAmp: 0.12, radius: 0.5, hue: 176, sat: 96, light: 68, alpha: 0.72, speed: 0.00088, phase: 0 },
-      { x: 0.78, y: 0.58, xAmp: 0.16, yAmp: 0.16, radius: 0.48, hue: 204, sat: 92, light: 46, alpha: 0.62, speed: 0.00072, phase: 1.8 },
-      { x: 0.45, y: 0.3, xAmp: 0.2, yAmp: 0.12, radius: 0.44, hue: 42, sat: 90, light: 82, alpha: 0.42, speed: 0.00076, phase: 3.2 },
-      { x: 0.36, y: 0.72, xAmp: 0.14, yAmp: 0.16, radius: 0.5, hue: 158, sat: 72, light: 28, alpha: 0.48, speed: 0.00064, phase: 4.6 },
-      { x: 0.58, y: 0.5, xAmp: 0.22, yAmp: 0.18, radius: 0.58, hue: 314, sat: 88, light: 62, alpha: 0.32, speed: 0.00058, phase: 6.1 },
-      { x: 0.7, y: 0.34, xAmp: 0.18, yAmp: 0.14, radius: 0.38, hue: 265, sat: 78, light: 66, alpha: 0.24, speed: 0.00068, phase: 8.4 },
+      { x: 0.66, y: 0.22, xAmp: 0.08, yAmp: 0.06, radius: 0.56, hue: 170, sat: 42, light: 70, alpha: 0.5, speed: 0.00024, phase: 0 },
+      { x: 0.78, y: 0.62, xAmp: 0.08, yAmp: 0.08, radius: 0.5, hue: 192, sat: 38, light: 46, alpha: 0.4, speed: 0.0002, phase: 1.8 },
+      { x: 0.44, y: 0.3, xAmp: 0.07, yAmp: 0.05, radius: 0.48, hue: 36, sat: 32, light: 76, alpha: 0.28, speed: 0.00018, phase: 3.2 },
+      { x: 0.36, y: 0.72, xAmp: 0.06, yAmp: 0.07, radius: 0.54, hue: 158, sat: 28, light: 28, alpha: 0.34, speed: 0.00016, phase: 4.6 },
     ];
 
     const hsla = (stop, phase, alphaFactor = 1) => {
-      const hue = (stop.hue + Math.sin(phase * 0.7) * 36 + Math.cos(phase * 0.38) * 24 + 360) % 360;
-      const light = Math.max(26, Math.min(88, stop.light + Math.sin(phase * 0.52) * 7));
+      const hue = (stop.hue + Math.sin(phase * 0.7) * 5 + Math.cos(phase * 0.38) * 3 + 360) % 360;
+      const light = Math.max(26, Math.min(84, stop.light + Math.sin(phase * 0.52) * 3));
       return `hsla(${hue}, ${stop.sat}%, ${light}%, ${stop.alpha * alphaFactor})`;
     };
 
@@ -743,21 +744,21 @@ function MockColorField() {
       }
 
       context.clearRect(0, 0, width, height);
-      const colorPhase = time * 0.00024;
+      const colorPhase = time * 0.00008;
       const base = context.createLinearGradient(0, 0, width, height);
-      base.addColorStop(0, `hsl(${174 + Math.sin(colorPhase) * 22}, 92%, 91%)`);
-      base.addColorStop(0.44, `hsl(${188 + Math.cos(colorPhase * 1.18) * 36}, 88%, 80%)`);
-      base.addColorStop(1, `hsl(${205 + Math.sin(colorPhase * 0.92) * 48}, 82%, 58%)`);
+      base.addColorStop(0, `hsl(${166 + Math.sin(colorPhase) * 3}, 30%, 88%)`);
+      base.addColorStop(0.44, `hsl(${180 + Math.cos(colorPhase * 1.18) * 4}, 32%, 76%)`);
+      base.addColorStop(1, `hsl(${194 + Math.sin(colorPhase * 0.92) * 5}, 34%, 52%)`);
       context.fillStyle = base;
       context.fillRect(0, 0, width, height);
       context.globalCompositeOperation = 'source-over';
-      context.filter = 'blur(22px)';
+      context.filter = 'blur(18px)';
 
       colorStops.forEach((stop) => {
         const phase = time * stop.speed + stop.phase;
-        const x = width * (stop.x + Math.sin(phase) * stop.xAmp + Math.sin(phase * 0.34 + stop.phase) * 0.05);
-        const y = height * (stop.y + Math.cos(phase * 0.82) * stop.yAmp + Math.cos(phase * 0.41) * 0.04);
-        const radius = Math.max(width, height) * (stop.radius + Math.sin(phase * 0.54) * 0.08);
+        const x = width * (stop.x + Math.sin(phase) * stop.xAmp + Math.sin(phase * 0.34 + stop.phase) * 0.02);
+        const y = height * (stop.y + Math.cos(phase * 0.82) * stop.yAmp + Math.cos(phase * 0.41) * 0.02);
+        const radius = Math.max(width, height) * (stop.radius + Math.sin(phase * 0.54) * 0.04);
         const gradient = context.createRadialGradient(x, y, 0, x, y, radius);
         gradient.addColorStop(0, hsla(stop, phase, 1));
         gradient.addColorStop(0.42, hsla(stop, phase + 0.8, 0.62));
@@ -767,25 +768,25 @@ function MockColorField() {
       });
 
       context.globalCompositeOperation = 'multiply';
-      context.filter = 'blur(26px)';
-      const darkPhase = time * 0.00052;
-      const darkX = width * (0.24 + Math.sin(darkPhase) * 0.14);
-      const darkY = height * (0.5 + Math.cos(darkPhase * 0.82) * 0.12);
+      context.filter = 'blur(22px)';
+      const darkPhase = time * 0.00018;
+      const darkX = width * (0.24 + Math.sin(darkPhase) * 0.06);
+      const darkY = height * (0.5 + Math.cos(darkPhase * 0.82) * 0.05);
       const dark = context.createRadialGradient(darkX, darkY, 0, darkX, darkY, Math.max(width, height) * 0.64);
-      dark.addColorStop(0, 'rgba(20, 45, 43, 0.42)');
-      dark.addColorStop(0.54, 'rgba(20, 45, 43, 0.18)');
+      dark.addColorStop(0, 'rgba(20, 45, 43, 0.34)');
+      dark.addColorStop(0.54, 'rgba(20, 45, 43, 0.14)');
       dark.addColorStop(1, 'rgba(20, 45, 43, 0)');
       context.fillStyle = dark;
       context.fillRect(0, 0, width, height);
 
       context.globalCompositeOperation = 'source-over';
       context.filter = 'none';
-      const sheenPhase = time * 0.00064;
-      const sheen = context.createLinearGradient(0, height * (0.2 + Math.sin(sheenPhase) * 0.06), width, height * (0.8 + Math.cos(sheenPhase) * 0.06));
-      sheen.addColorStop(0, 'rgba(255, 255, 255, 0.36)');
-      sheen.addColorStop(0.42, 'rgba(255, 255, 255, 0.08)');
-      sheen.addColorStop(0.76, 'rgba(51, 211, 214, 0.18)');
-      sheen.addColorStop(1, 'rgba(0, 0, 0, 0.08)');
+      const sheenPhase = time * 0.0002;
+      const sheen = context.createLinearGradient(0, height * (0.2 + Math.sin(sheenPhase) * 0.03), width, height * (0.8 + Math.cos(sheenPhase) * 0.03));
+      sheen.addColorStop(0, 'rgba(255, 255, 255, 0.24)');
+      sheen.addColorStop(0.42, 'rgba(255, 255, 255, 0.06)');
+      sheen.addColorStop(0.76, 'rgba(105, 173, 169, 0.1)');
+      sheen.addColorStop(1, 'rgba(0, 0, 0, 0.06)');
       context.fillStyle = sheen;
       context.fillRect(0, 0, width, height);
 
@@ -806,7 +807,12 @@ function MockColorField() {
     };
 
     const animate = (time) => {
-      paint(time);
+      // The field is deliberately ambient; 30 fps keeps it smooth while
+      // halving the amount of canvas gradient work on high-refresh displays.
+      if (time - lastPaintTime >= 1000 / 30) {
+        paint(time);
+        lastPaintTime = time;
+      }
       animationFrame = window.requestAnimationFrame(animate);
     };
 
@@ -816,6 +822,7 @@ function MockColorField() {
         paint(window.performance.now());
         return;
       }
+      lastPaintTime = Number.NEGATIVE_INFINITY;
       animationFrame = window.requestAnimationFrame(animate);
     };
 
@@ -926,7 +933,7 @@ function About() {
   const [activeLine, setActiveLine] = useState(0);
   const lines = [
     '我是献超前，技术 ID 为 LeoninCS，河南大学软件工程专业本科在读，预计于 2027 年毕业。目前在上海 MiniMax AI Infra 系统组实习，持续参与实际工程项目与开源相关工作。',
-    'AI重度患者，日均上亿token用量；DevOps理念践行者，具备Go后端、AI Agent开发能力、Docker、Kubernetes等云原生技术部署运维能力，并具备实际项目落地经验；',
+    'AI 重度用户，日均上亿 Token；DevOps 理念践行者，主要关注 AI Infra、Go 后端、Docker、Kubernetes 等云原生基础设施，并具备实际项目落地经验；',
     '开源贡献者，维护 Sealos 合规组件，个人项目 GitHub 累计 500+ Stars；技术内容创作者，全网累计 2000+ 粉丝，1.5w+ 点赞收藏数；Web3 信徒，认同去中心化的理念。',
     '生活中，我喜欢 骑行、摄影与 Hi-Fi，也常听 Hip Hop 和 R&B。除此之外，我对投资理财也有一定兴趣，主要关注美股与加密货币，保持对技术与生活的长期探索。',
   ];
@@ -1023,7 +1030,7 @@ function Projects() {
           </div>
           <p>
             这里集中展示 CompliK、GCFeed、SDD Agent Harness 和 GoClub，
-            对应集群合规、内容流后端、智能体工作流和开源知识库。
+            对应集群合规、内容流后端、规范驱动工作流和开源知识库。
           </p>
         </div>
 
@@ -1117,7 +1124,7 @@ function Projects() {
 }
 
 function MiniMaxInfraVisual({ card }) {
-  const flow = ['Volcano Job', 'Resource Scheduler', 'GPU Node Pool'];
+  const flow = ['Workload Request', 'Solar', 'Volcano Scheduler'];
 
   return (
     <div className="get-visual minimax-visual">
@@ -1125,18 +1132,18 @@ function MiniMaxInfraVisual({ card }) {
         <span />
         <span />
         <span />
-        <span className="visual-tag">调度控制面</span>
+        <span className="visual-tag">Solar 资源管理</span>
       </div>
       <div className="minimax-console">
         <div className="minimax-console-head">
           <span className="minimax-logo">
             <img src={card.brandLogo} alt="MiniMax 官方 Logo" loading="lazy" />
           </span>
-          <span>AI INFRA / SCHEDULING CONTROL PLANE</span>
+          <span>AI INFRA / SOLAR RESOURCE CONTROL PLANE</span>
           <i><b />ONLINE</i>
         </div>
 
-        <div className="minimax-flow" aria-label="Volcano Job 资源调度链路">
+        <div className="minimax-flow" aria-label="Solar 与 Volcano Scheduler 资源链路">
           {flow.map((item, index) => (
             <React.Fragment key={item}>
               <span>
@@ -1297,7 +1304,7 @@ function Internship() {
       eyebrow="实习经历"
       title="实习内容落在真实系统里。"
       mutedTitle=" MiniMax AI Infra 与 Sealos。"
-      text="当前在 MiniMax 参与面向 Volcano Job 的 AI 训练资源编排、集群调整与备机保障；此前在 Sealos 环界云计算参与集群合规组件建设。"
+      text="当前在 MiniMax 参与 Solar 机器资源管理与调配平台建设，为 Volcano 体系下的训练、推理工作负载提供资源保障；此前在 Sealos 环界云计算参与集群合规组件建设。"
       cards={internshipCards}
     />
   );
@@ -1331,25 +1338,11 @@ function Hobbies() {
 
 function Socials() {
   return (
-    <section id="socials" className="faq-section">
+    <section id="socials" className="faq-section" aria-labelledby="socials-title">
       <div className="section-inner">
-        <div className="faq-heading">
-          <div>
-            <span className="pill muted">社媒账号</span>
-            <h2>不同平台展示不同侧面。</h2>
-          </div>
-        </div>
+        <h2 id="socials-title" className="section-visually-hidden">社媒与联系</h2>
 
-        <div className="social-strip" aria-label="社媒账号">
-          {socials.map((item) => (
-            <a href={item.href} key={item.name} rel="noreferrer" target="_blank">
-              <span aria-hidden="true">
-                <item.Icon />
-              </span>
-              <strong>{item.name}</strong>
-            </a>
-          ))}
-        </div>
+        <span className="social-section-label pill muted">社媒</span>
 
         <div className="final-copy">
           <h2>沟通与协作，从这里开始。</h2>
@@ -1357,6 +1350,30 @@ function Socials() {
             岗位沟通、面试安排、工程机会、技术交流和开源协作可以直接通过邮箱联系。
           </p>
           <a className="cta" href={`mailto:${contactEmail}`}>发送邮件</a>
+        </div>
+
+        <div className="social-directory">
+          <div className="social-strip" aria-label="社媒账号">
+            <div className="social-orbit">
+              {socials.map((item, index) => (
+                <a
+                  className={`social-${item.tone}`}
+                  href={item.href}
+                  key={item.name}
+                  rel="noreferrer"
+                  style={{ '--social-angle': `${index * 72}deg` }}
+                  target="_blank"
+                >
+                  <span className="social-orbit-card">
+                    <span aria-hidden="true">
+                      <item.Icon />
+                    </span>
+                    <strong>{item.name}</strong>
+                  </span>
+                </a>
+              ))}
+            </div>
+          </div>
         </div>
       </div>
     </section>
@@ -1384,8 +1401,8 @@ function App() {
   return (
     <>
       <StartupLoader progress={progress} ready={ready} />
+      <Nav />
       <main className={ready ? 'site-shell is-ready' : 'site-shell'}>
-        <Nav />
         <Hero />
         <About />
         <Internship />
