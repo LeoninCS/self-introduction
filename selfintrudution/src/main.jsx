@@ -14,6 +14,9 @@ const mockMemberIcons = [
   { src: '/images/brand/labring.png', alt: 'LabRing 图标' },
 ];
 
+const unsplashImage = (photoId) =>
+  `https://images.unsplash.com/${photoId}?auto=format&fit=crop&w=1600&q=82`;
+
 const projects = [
   {
     label: 'Feed',
@@ -36,11 +39,11 @@ const projects = [
   {
     label: 'Cloud',
     title: 'CompliK',
-    caption: 'Sealos 系统组实习项目，参与集群合规系统 Admin 开发、系统适配、CI、多端分析插件和 ProcScan 二进制分析。',
+    caption: 'Sealos 系统组实习项目，参与集群合规系统 Admin 开发、Path 子路径合规分析、CI、多端分析插件和 ProcScan 二进制分析。',
     href: 'https://github.com/labring/CompliK',
-    stack: ['Sealos', 'Kubernetes', 'CI', 'Admin', 'ProcScan'],
-    highlights: ['集群合规系统', '多端分析插件', '二进制分析'],
-    preview: ['Cluster', 'Admin', 'Policy', 'ProcScan', 'Report'],
+    stack: ['Sealos', 'Kubernetes', 'CI', 'Admin', 'Path', 'ProcScan'],
+    highlights: ['集群合规系统', 'Path 子路径分析', '二进制分析'],
+    preview: ['Cluster', 'Admin', 'Path Scan', 'ProcScan', 'Report'],
   },
   {
     label: 'Open Source',
@@ -57,20 +60,69 @@ const profileRows = [
   ['姓名', '献超前 / Xianchao Qian'],
   ['技术 ID', 'LeoninCS'],
   ['学校', '河南大学 软件工程本科在读 · 开封'],
-  ['当前工作地', '杭州，中国'],
+  ['当前工作地', '上海，中国'],
   ['求职方向', '开发工程师'],
   ['技术方向', 'Go后端 · AI Agent · 云原生'],
 ];
 
 const internshipCards = [
   {
+    eyebrow: 'AI Infra 实习',
+    company: 'MiniMax · AI Infra 系统组',
+    period: '2026.07.13 — 至今',
+    title: '参与 AI 训练资源编排平台建设，面向 Volcano Job 提供机器资源调度能力。',
+    text: '以 Volcano Job 为训练任务载体，围绕作业资源诉求、节点匹配与集群容量状态完成机器资源编排，重点建设集群调整与备机保障链路。',
+    focus: '完善集群机器调整与备机保障机制，提升资源变更链路的并发效率、触发灵活性与调度稳定性。',
+    deliverables: [
+      {
+        title: '受控并行替换',
+        date: '08.10',
+        text: '将备机替换从单节点串行演进为受控并行执行模型，支持单任务批量处置多台故障节点。',
+      },
+      {
+        title: '多策略触发机制',
+        date: '09.05',
+        text: '引入预约触发与空负载触发，兼顾资源变更时效与运行中作业安全。',
+      },
+      {
+        title: '拓扑感知调度',
+        date: '09.30',
+        text: '实现 topology required / preferred 选机语义：支持约束指定 group、优先选择拓扑邻近节点，并在资源不足时回退基础策略。',
+      },
+    ],
+    visualTitle: 'MiniMax AI Infra',
+    visualText: 'Work Order / Scheduler / Topology',
+    brandLogo: 'https://filecdn.minimax.chat/public/969d635c-cab6-45cc-8d61-47c9fe40c81f.png',
+    variant: 'minimax',
+  },
+  {
     eyebrow: '实习经历',
+    company: 'Sealos · 环界云计算',
+    period: '2026.03.11 — 2026.07.09',
     title: 'Sealos 系统组实习，负责 Sealos 集群合规组件建设。',
-    text: '负责 Admin 面板全栈开发、Admin 与 CompliK 适配、CompliK CI/CD 搭建、多端分析插件、ProcScan 二进制分析和系统迭代维护与优化。',
-    note: '关键词：Admin、CI、合规扫描、ProcScan、系统适配。',
+    text: '负责 Admin 面板全栈开发、Path 子路径合规分析、CompliK CI/CD 搭建、多端分析插件、ProcScan 二进制分析和系统迭代维护与优化。',
+    focus: '建设和完善集群合规组件，覆盖管理面、Path 子路径与进程分析链路。',
+    deliverables: [
+      {
+        title: 'Admin 系统适配',
+        code: 'ADMIN',
+        text: '负责 Admin 面板全栈开发，完成 Admin 与 CompliK 适配及 CI/CD 建设。',
+      },
+      {
+        title: 'Path 子路径合规分析',
+        code: 'PATH',
+        text: '支持指定 Path 及其子路径的合规扫描、规则匹配与结果归集。',
+      },
+      {
+        title: 'ProcScan 进程分析',
+        code: 'PROC',
+        text: '实现多端分析插件与 ProcScan 二进制进程分析，并持续维护优化系统。',
+      },
+    ],
     visualTitle: 'CompliK',
-    visualText: 'Admin / CI / ProcScan / Plugin',
-    image: '/picture/complik.jpg',
+    visualText: 'Admin / Path / ProcScan / Report',
+    brandLogo: '/images/brand/sealos.svg',
+    variant: 'sealos',
   },
 ];
 
@@ -82,7 +134,8 @@ const competitionCards = [
     note: '长期算法训练支撑复杂度分析、边界覆盖和实现稳定性。',
     visualTitle: 'LeetCode 2100',
     visualText: 'Codeforces 1653 / 1500+ Problems',
-    image: '/picture/46-icpc-wuhan-regional-01.jpg',
+    image: unsplashImage('photo-1631350397792-8e0c2de5b637'),
+    imagePosition: 'center 54%',
   },
   {
     eyebrow: '省赛与国赛',
@@ -91,7 +144,8 @@ const competitionCards = [
     note: '团队赛与个人赛共同体现赛时分工、题目筛选和稳定交付。',
     visualTitle: 'CCPC Gold',
     visualText: 'GPLT National Second Prize',
-    image: '/picture/42-icpc-shenzhen-invitational-01.jpg',
+    image: unsplashImage('photo-1504384308090-c894fdcc538d'),
+    imagePosition: 'center 48%',
   },
   {
     eyebrow: '补充奖项',
@@ -100,7 +154,8 @@ const competitionCards = [
     note: '多类型竞赛经历覆盖算法基本功和短时编码能力。',
     visualTitle: 'Lanqiao / Baidu Star',
     visualText: '省一 / 初赛铜奖',
-    image: '/picture/48-icpc-wuhan-regional-03.jpg',
+    image: unsplashImage('photo-1504384764586-bb4cdc1707b0'),
+    imagePosition: 'center 46%',
   },
 ];
 
@@ -112,16 +167,18 @@ const hobbyCards = [
     visualTitle: 'Cycling 10000+ km',
     visualText: '环太湖 / 环海南岛 / 复盘记录',
     note: '长期主义从路上开始，也会回到工程节奏里。',
-    image: '/picture/38-bike-coastal-road.jpg',
+    image: unsplashImage('photo-1517649763962-0c623066013b'),
+    imagePosition: 'center 52%',
   },
   {
     eyebrow: '摄影',
     title: '摄影记录城市、山野、湖畔和古建。',
     text: '偏爱自然光、街景、旅途和建筑细节，用照片记录观察力和审美判断。',
-    visualTitle: 'Photography',
-    visualText: '城市 / 山野 / 湖畔 / 古建',
+    visualTitle: 'Nikon Photography',
+    visualText: 'Nikon / 城市 / 山野 / 古建',
     note: '照片是个人页面里的真实质感来源。',
-    image: '/picture/16-lake-sunset-wide.jpg',
+    image: unsplashImage('photo-1488903460117-6fb0b4a4ec9f'),
+    imagePosition: 'center 46%',
   },
   {
     eyebrow: '音乐与 HiFi',
@@ -130,7 +187,8 @@ const hobbyCards = [
     visualTitle: 'Music / HiFi',
     visualText: 'R&B / Jazz / Hip-Hop / Pop',
     note: '把听感当作一种审美训练。',
-    image: '/picture/ie200.png',
+    image: unsplashImage('photo-1609702847389-b8aec1b0b929'),
+    imagePosition: 'center 50%',
   },
   {
     eyebrow: '投资观察',
@@ -139,7 +197,8 @@ const hobbyCards = [
     visualTitle: 'Finance Notes',
     visualText: '商业模式 / 现金流 / 技术趋势',
     note: '用结构化记录训练信息判断。',
-    image: '/picture/nasdaq.png',
+    image: unsplashImage('photo-1611974789855-9c2a0a7236a3'),
+    imagePosition: 'center 50%',
   },
 ];
 
@@ -195,7 +254,7 @@ const deferredAssetUrls = Array.from(new Set([
   '/picture/35-programming-contest-team-photo.jpg',
   '/picture/38-bike-coastal-road.jpg',
   '/picture/01-city-tower-blue-hour.jpg',
-  ...internshipCards.map((card) => card.image),
+  ...internshipCards.flatMap((card) => [card.image, card.brandLogo].filter(Boolean)),
   ...competitionCards.map((card) => card.image),
   ...hobbyCards.map((card) => card.image),
 ]));
@@ -730,9 +789,17 @@ function MockColorField() {
       context.fillStyle = sheen;
       context.fillRect(0, 0, width, height);
 
+      const highlight = context.createLinearGradient(0, 0, 0, height);
+      highlight.addColorStop(0, 'rgba(255, 255, 255, 0.18)');
+      highlight.addColorStop(0.28, 'rgba(255, 255, 255, 0.04)');
+      highlight.addColorStop(0.54, 'rgba(255, 255, 255, 0)');
+      context.fillStyle = highlight;
+      context.fillRect(0, 0, width, height);
+
       const shadow = context.createLinearGradient(0, 0, 0, height);
-      shadow.addColorStop(0, 'rgba(255, 255, 255, 0.18)');
-      shadow.addColorStop(0.34, 'rgba(0, 0, 0, 0)');
+      shadow.addColorStop(0, 'rgba(0, 0, 0, 0)');
+      shadow.addColorStop(0.44, 'rgba(0, 0, 0, 0)');
+      shadow.addColorStop(0.72, 'rgba(0, 0, 0, 0.12)');
       shadow.addColorStop(1, 'rgba(0, 0, 0, 0.38)');
       context.fillStyle = shadow;
       context.fillRect(0, 0, width, height);
@@ -816,11 +883,11 @@ function ResumeMockup({ compact = false }) {
                 <img src={icon.src} alt={icon.alt} />
               </span>
             ))}
-            <strong>献超前 · 河南大学软件工程本科 · 杭州</strong>
+            <strong>献超前 · 河南大学软件工程本科 · 上海</strong>
           </div>
           <a className="mock-button" href={`mailto:${contactEmail}`}>查看联系方式</a>
           <small>
-            河大软件工程 → 算法竞赛 → Go 后端 → Sealos 实习 → 持续学习
+            河大软件工程 → Go 后端 → Sealos 系统组 → MiniMax AI Infra
           </small>
         </div>
       </section>
@@ -858,9 +925,9 @@ function About() {
   const sectionRef = useRef(null);
   const [activeLine, setActiveLine] = useState(0);
   const lines = [
-    '我是献超前，技术 ID 为 LeoninCS，河南大学软件工程专业本科在读，预计于 2027 年毕业。目前在杭州一家开源初创公司实习，持续参与实际工程项目与开源相关工作。',
+    '我是献超前，技术 ID 为 LeoninCS，河南大学软件工程专业本科在读，预计于 2027 年毕业。目前在上海 MiniMax AI Infra 系统组实习，持续参与实际工程项目与开源相关工作。',
     'AI重度患者，日均上亿token用量；DevOps理念践行者，具备Go后端、AI Agent开发能力、Docker、Kubernetes等云原生技术部署运维能力，并具备实际项目落地经验；',
-    '开源贡献者，维护Sealos合规组件，个人项目github累计400+star；技术内容创作者，全网累计1500+粉丝，1.5w+点赞收藏数；Web3信徒，认同去中心化的理念。',
+    '开源贡献者，维护 Sealos 合规组件，个人项目 GitHub 累计 500+ Stars；技术内容创作者，全网累计 2000+ 粉丝，1.5w+ 点赞收藏数；Web3 信徒，认同去中心化的理念。',
     '生活中，我喜欢 骑行、摄影与 Hi-Fi，也常听 Hip Hop 和 R&B。除此之外，我对投资理财也有一定兴趣，主要关注美股与加密货币，保持对技术与生活的长期探索。',
   ];
 
@@ -1049,6 +1116,103 @@ function Projects() {
   );
 }
 
+function MiniMaxInfraVisual({ card }) {
+  const flow = ['Volcano Job', 'Resource Scheduler', 'GPU Node Pool'];
+
+  return (
+    <div className="get-visual minimax-visual">
+      <div className="visual-toolbar">
+        <span />
+        <span />
+        <span />
+        <span className="visual-tag">调度控制面</span>
+      </div>
+      <div className="minimax-console">
+        <div className="minimax-console-head">
+          <span className="minimax-logo">
+            <img src={card.brandLogo} alt="MiniMax 官方 Logo" loading="lazy" />
+          </span>
+          <span>AI INFRA / SCHEDULING CONTROL PLANE</span>
+          <i><b />ONLINE</i>
+        </div>
+
+        <div className="minimax-flow" aria-label="Volcano Job 资源调度链路">
+          {flow.map((item, index) => (
+            <React.Fragment key={item}>
+              <span>
+                <small>0{index + 1}</small>
+                {item}
+              </span>
+              {index < flow.length - 1 && <i aria-hidden="true">→</i>}
+            </React.Fragment>
+          ))}
+        </div>
+
+        <div className="minimax-milestones" aria-label="能力建设记录">
+          {card.deliverables.map((item, index) => (
+            <article key={item.title}>
+              <header>
+                <span><small>0{index + 1}</small>{item.title}</span>
+                <time>{item.date}</time>
+              </header>
+              <p>{item.text}</p>
+            </article>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function SealosComplianceVisual({ card }) {
+  const pipeline = ['Cluster', 'Policy Engine', 'Compliance Report'];
+
+  return (
+    <div className="get-visual sealos-visual">
+      <div className="visual-toolbar">
+        <span />
+        <span />
+        <span />
+        <span className="visual-tag">集群合规</span>
+      </div>
+      <div className="minimax-console sealos-console">
+        <div className="minimax-console-head sealos-console-head">
+          <span className="sealos-console-logo">
+            <img src={card.brandLogo} alt="Sealos 官方 Logo" />
+            <b>Sealos</b>
+          </span>
+          <span>SYSTEM GROUP / COMPLIANCE</span>
+          <i><b />ONLINE</i>
+        </div>
+
+        <div className="minimax-flow sealos-flow" aria-label="CompliK 合规分析链路">
+          {pipeline.map((item, index) => (
+            <React.Fragment key={item}>
+              <span>
+                <small>0{index + 1}</small>
+                {item}
+              </span>
+              {index < pipeline.length - 1 && <i aria-hidden="true">→</i>}
+            </React.Fragment>
+          ))}
+        </div>
+
+        <div className="minimax-milestones sealos-capabilities" aria-label="CompliK 能力建设记录">
+          {card.deliverables.map((item, index) => (
+            <article key={item.title}>
+              <header>
+                <span><small>0{index + 1}</small>{item.title}</span>
+                <time>{item.code}</time>
+              </header>
+              <p>{item.text}</p>
+            </article>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+}
+
 function StorySection({ id, eyebrow, title, mutedTitle, text, cards }) {
   return (
     <section id={id} className="what-section">
@@ -1067,7 +1231,7 @@ function StorySection({ id, eyebrow, title, mutedTitle, text, cards }) {
         <div className="get-stack">
           {cards.map((card, index) => (
             <article
-              className={`get-card card-${index + 1}`}
+              className={`get-card card-${index + 1}${card.variant ? ` ${card.variant}-card` : ''}`}
               key={card.title}
               style={{
                 '--stack-top': `${86 + index * 18}px`,
@@ -1076,27 +1240,48 @@ function StorySection({ id, eyebrow, title, mutedTitle, text, cards }) {
             >
               <div className="get-copy">
                 <span>{card.eyebrow}</span>
+                {card.company && (
+                  <div className="experience-meta">
+                    <b>{card.company}</b>
+                    <time>{card.period}</time>
+                  </div>
+                )}
                 <h3>{card.title}</h3>
                 <p>{card.text}</p>
-                <strong>{card.note}</strong>
+                {card.focus && (
+                  <div className="experience-focus">
+                    <b>核心职责</b>
+                    <span>{card.focus}</span>
+                  </div>
+                )}
+                {card.note && <strong>{card.note}</strong>}
               </div>
-              <div className="get-visual">
-                <div className="visual-toolbar">
-                  <span />
-                  <span />
-                  <span />
-                  <span className="visual-tag">记录</span>
-                </div>
+              {card.variant === 'minimax' ? (
+                <MiniMaxInfraVisual card={card} />
+              ) : card.variant === 'sealos' ? (
+                <SealosComplianceVisual card={card} />
+              ) : (
                 <div
-                  className="visual-card"
-                  style={{ '--visual-image': `url(${card.image})` }}
+                  className="get-visual"
+                  style={{
+                    '--visual-image': `url(${card.image})`,
+                    '--visual-position': card.imagePosition ?? 'center',
+                  }}
                 >
-                  <div />
-                  <h4>{card.visualTitle}</h4>
-                  <p>{card.visualText}</p>
-                  <span className="visual-note">重点记录</span>
+                  <div className="visual-toolbar">
+                    <span />
+                    <span />
+                    <span />
+                    <span className="visual-tag">记录</span>
+                  </div>
+                  <div className="visual-card">
+                    <div />
+                    <h4>{card.visualTitle}</h4>
+                    <p>{card.visualText}</p>
+                    <span className="visual-note">重点记录</span>
+                  </div>
                 </div>
-              </div>
+              )}
             </article>
           ))}
         </div>
@@ -1111,8 +1296,8 @@ function Internship() {
       id="internship"
       eyebrow="实习经历"
       title="实习内容落在真实系统里。"
-      mutedTitle=" 从Admin到CompliK。"
-      text="这一块集中展示 Sealos 系统组的实习经历：负责了Sealos的集群合规组件，主要有海外合规、Admin 全栈、搭建CI/CD、多端分析插件、二进制进程分析和持续维护与优化。"
+      mutedTitle=" MiniMax AI Infra 与 Sealos。"
+      text="当前在 MiniMax 参与面向 Volcano Job 的 AI 训练资源编排、集群调整与备机保障；此前在 Sealos 环界云计算参与集群合规组件建设。"
       cards={internshipCards}
     />
   );
