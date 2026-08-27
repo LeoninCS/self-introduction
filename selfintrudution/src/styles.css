@@ -2423,7 +2423,7 @@ body.is-scrolled .top-nav {
   }
 }
 
-/* MiniMax AI Infra experience card: a quiet monochrome console with a small
+/* MiniMax Cloud Infra experience card: a quiet monochrome console with a small
  * amount of signal color, matching the brand's black / white / spectrum feel. */
 #internship .experience-meta {
   display: grid;
@@ -2542,6 +2542,30 @@ body.is-scrolled .top-nav {
     0 28px 60px rgba(0, 0, 0, 0.28),
     inset 0 1px rgba(255, 255, 255, 0.1);
   backdrop-filter: blur(18px);
+}
+
+.minimax-empty-console {
+  display: grid;
+  place-items: center;
+}
+
+.minimax-brand-lockup {
+  display: grid;
+  gap: 22px;
+  justify-items: center;
+}
+
+.minimax-brand-lockup .minimax-logo {
+  width: min(220px, 72%);
+  height: 54px;
+  padding: 10px 16px;
+}
+
+.minimax-brand-lockup > strong {
+  color: rgba(255, 255, 255, 0.84);
+  font-size: clamp(24px, 3vw, 38px);
+  font-weight: 480;
+  letter-spacing: 0.08em;
 }
 
 .minimax-console-head {

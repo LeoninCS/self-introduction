@@ -62,36 +62,14 @@ const profileRows = [
   ['学校', '河南大学 软件工程本科在读 · 开封'],
   ['当前工作地', '上海，中国'],
   ['求职方向', '开发工程师'],
-  ['技术方向', 'AI Infra · Go 后端 · 云原生'],
+  ['技术方向', 'Cloud Infra · Go 后端 · 云原生'],
 ];
 
 const internshipCards = [
   {
-    eyebrow: 'AI Infra 实习 · Solar',
-    company: 'MiniMax · AI Infra 系统组',
+    eyebrow: 'Cloud Infra 实习',
+    company: 'MiniMax · Cloud Infra 系统组',
     period: '2026.07.13 — 至今',
-    title: '参与 Solar 资源分配平台建设，承接 Volcano 侧业务资源请求。',
-    text: 'Kubernetes 负责将机器池化为可调度资源；Volcano 侧业务向 Solar 提交需求，Solar 统一管理资源容量并将合适的资源分配给对应业务。',
-    focus: '围绕 Solar 的集群机器调整与备机保障机制，提升资源变更链路的并发效率、触发灵活性与调度稳定性。',
-    deliverables: [
-      {
-        title: '受控并行替换',
-        date: '08.10',
-        text: '将备机替换从单节点串行演进为受控并行执行模型，支持单任务批量处置多台故障节点。',
-      },
-      {
-        title: '多策略触发机制',
-        date: '09.05',
-        text: '引入预约触发与空负载触发，兼顾资源变更时效与运行中作业安全。',
-      },
-      {
-        title: '拓扑感知调度',
-        date: '09.30',
-        text: '完善 Solar 选机链路的 topology required / preferred 语义：支持约束指定 group、优先选择拓扑邻近节点，并在资源不足时回退基础策略。',
-      },
-    ],
-    visualTitle: 'Solar · Resource Allocation Platform',
-    visualText: 'Kubernetes Resource Pool / Solar Allocation / Business Workload',
     brandLogo: 'https://filecdn.minimax.chat/public/969d635c-cab6-45cc-8d61-47c9fe40c81f.png',
     variant: 'minimax',
   },
@@ -899,7 +877,7 @@ function ResumeMockup({ compact = false }) {
           </div>
           <a className="mock-button" href={`mailto:${contactEmail}`}>查看联系方式</a>
           <small>
-            河大软件工程 → Go 后端 → Sealos 系统组 → MiniMax AI Infra
+            河大软件工程 → Go 后端 → Sealos 系统组 → MiniMax Cloud Infra
           </small>
         </div>
       </section>
@@ -937,8 +915,8 @@ function About() {
   const sectionRef = useRef(null);
   const [activeLine, setActiveLine] = useState(0);
   const lines = [
-    '我是献超前，技术 ID 为 LeoninCS，河南大学软件工程专业本科在读，预计于 2027 年毕业。目前在上海 MiniMax AI Infra 系统组实习，持续参与实际工程项目与开源相关工作。',
-    'AI 重度用户，日均上亿 Token；DevOps 理念践行者，主要关注 AI Infra、Go 后端、Docker、Kubernetes 等云原生基础设施，并具备实际项目落地经验；',
+    '我是献超前，技术 ID 为 LeoninCS，河南大学软件工程专业本科在读，预计于 2027 年毕业。目前在上海 MiniMax Cloud Infra 系统组实习，持续参与实际工程项目与开源相关工作。',
+    'AI 重度用户，日均上亿 Token；DevOps 理念践行者，主要关注 Cloud Infra、Go 后端、Docker、Kubernetes 等云原生基础设施，并具备实际项目落地经验；',
     '开源贡献者，维护 Sealos 合规组件，个人项目 GitHub 累计 500+ Stars；技术内容创作者，全网累计 2000+ 粉丝，1.5w+ 点赞收藏数；Web3 信徒，认同去中心化的理念。',
     '生活中，我喜欢 骑行、摄影与 Hi-Fi，也常听 Hip Hop 和 R&B。除此之外，我对投资理财也有一定兴趣，主要关注美股与加密货币，保持对技术与生活的长期探索。',
   ];
@@ -1128,48 +1106,21 @@ function Projects() {
   );
 }
 
-function MiniMaxInfraVisual({ card }) {
-  const flow = ['Volcano 业务请求', 'Solar 分配平台', '业务获得 K8s 资源'];
-
+function MiniMaxCloudInfraVisual({ card }) {
   return (
     <div className="get-visual minimax-visual">
       <div className="visual-toolbar">
         <span />
         <span />
         <span />
-        <span className="visual-tag">Solar 资源管理</span>
+        <span className="visual-tag">Cloud Infra</span>
       </div>
-      <div className="minimax-console">
-        <div className="minimax-console-head">
+      <div className="minimax-console minimax-empty-console">
+        <div className="minimax-brand-lockup">
           <span className="minimax-logo">
             <img src={card.brandLogo} alt="MiniMax 官方 Logo" loading="lazy" />
           </span>
-          <span>AI INFRA / SOLAR RESOURCE CONTROL PLANE</span>
-          <i><b />ONLINE</i>
-        </div>
-
-        <div className="minimax-flow" aria-label="Volcano 业务请求经 Solar 分配 Kubernetes 池化资源">
-          {flow.map((item, index) => (
-            <React.Fragment key={item}>
-              <span>
-                <small>0{index + 1}</small>
-                {item}
-              </span>
-              {index < flow.length - 1 && <i aria-hidden="true">→</i>}
-            </React.Fragment>
-          ))}
-        </div>
-
-        <div className="minimax-milestones" aria-label="能力建设记录">
-          {card.deliverables.map((item, index) => (
-            <article key={item.title}>
-              <header>
-                <span><small>0{index + 1}</small>{item.title}</span>
-                <time>{item.date}</time>
-              </header>
-              <p>{item.text}</p>
-            </article>
-          ))}
+          <strong>Cloud Infra</strong>
         </div>
       </div>
     </div>
@@ -1244,7 +1195,7 @@ function StorySection({ id, eyebrow, title, mutedTitle, text, cards }) {
           {cards.map((card, index) => (
             <article
               className={`get-card card-${index + 1}${card.variant ? ` ${card.variant}-card` : ''}`}
-              key={card.title}
+              key={card.company ?? card.title}
               style={{
                 '--stack-top': `${86 + index * 18}px`,
                 '--stack-z': index + 1,
@@ -1258,8 +1209,8 @@ function StorySection({ id, eyebrow, title, mutedTitle, text, cards }) {
                     <time>{card.period}</time>
                   </div>
                 )}
-                <h3>{card.title}</h3>
-                <p>{card.text}</p>
+                {card.title && <h3>{card.title}</h3>}
+                {card.text && <p>{card.text}</p>}
                 {card.focus && (
                   <div className="experience-focus">
                     <b>核心职责</b>
@@ -1269,7 +1220,7 @@ function StorySection({ id, eyebrow, title, mutedTitle, text, cards }) {
                 {card.note && <strong>{card.note}</strong>}
               </div>
               {card.variant === 'minimax' ? (
-                <MiniMaxInfraVisual card={card} />
+                <MiniMaxCloudInfraVisual card={card} />
               ) : card.variant === 'sealos' ? (
                 <SealosComplianceVisual card={card} />
               ) : (
@@ -1308,8 +1259,8 @@ function Internship() {
       id="internship"
       eyebrow="实习经历"
       title="实习内容落在真实系统里。"
-      mutedTitle=" MiniMax AI Infra 与 Sealos。"
-      text="当前在 MiniMax 参与 Solar 机器资源管理与调配平台建设，为 Volcano 体系下的训练、推理工作负载提供资源保障；此前在 Sealos 环界云计算参与集群合规组件建设。"
+      mutedTitle=" MiniMax Cloud Infra 与 Sealos。"
+      text="当前在 MiniMax Cloud Infra 系统组实习；此前在 Sealos 环界云计算参与集群合规组件建设。"
       cards={internshipCards}
     />
   );
