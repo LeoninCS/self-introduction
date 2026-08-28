@@ -558,7 +558,7 @@ function useScrollEffects() {
     setRootVar('--hero-ui-opacity', '1');
     setRootVar('--forest-scale', '1');
 
-    const stackGroups = [...document.querySelectorAll('.get-stack')].map((stack) => ({
+    const stackGroups = [...document.querySelectorAll('.get-stack:not(.is-flow)')].map((stack) => ({
       stack,
       cards: [...stack.querySelectorAll('.get-card')],
     }));
@@ -1176,7 +1176,7 @@ function SealosComplianceVisual({ card }) {
   );
 }
 
-function StorySection({ id, eyebrow, title, mutedTitle, text, cards }) {
+function StorySection({ id, eyebrow, title, mutedTitle, text, cards, stacked = true }) {
   return (
     <section id={id} className="what-section">
       <div className="section-inner">
@@ -1191,15 +1191,15 @@ function StorySection({ id, eyebrow, title, mutedTitle, text, cards }) {
           <p>{text}</p>
         </div>
 
-        <div className="get-stack">
+        <div className={`get-stack${stacked ? '' : ' is-flow'}`}>
           {cards.map((card, index) => (
             <article
               className={`get-card card-${index + 1}${card.variant ? ` ${card.variant}-card` : ''}`}
               key={card.company ?? card.title}
-              style={{
+              style={stacked ? {
                 '--stack-top': `${86 + index * 18}px`,
                 '--stack-z': index + 1,
-              }}
+              } : undefined}
             >
               <div className="get-copy">
                 <span>{card.eyebrow}</span>
@@ -1262,6 +1262,7 @@ function Internship() {
       mutedTitle=" MiniMax Cloud Infra 与 Sealos。"
       text="当前在 MiniMax Cloud Infra 系统组实习；此前在 Sealos 环界云计算参与集群合规组件建设。"
       cards={internshipCards}
+      stacked={false}
     />
   );
 }
